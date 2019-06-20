@@ -16,7 +16,10 @@ Gem::Specification.new do |s|
   s.summary = "A decidim petitions module"
   s.description = "Add the functionality to work with DECODE petitions.."
 
-  s.files = Dir["{app,config,lib}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,lib}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md", "bin/zenroom-static"]
+
+  s.executables = ["zenroom-static"]
+  s.bindir = "bin"
 
   s.add_dependency "decidim-core", Decidim::Petitions.version
 
