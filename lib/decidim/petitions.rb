@@ -4,6 +4,7 @@ require "decidim/petitions/admin"
 require "decidim/petitions/engine"
 require "decidim/petitions/admin_engine"
 require "decidim/petitions/component"
+require "decidim/petitions/decode"
 
 module Decidim
   # This namespace holds the logic of the `Petitions` component. This component
