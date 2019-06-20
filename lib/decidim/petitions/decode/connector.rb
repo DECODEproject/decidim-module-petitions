@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'decidim/petitions/decode/services/dddc_credential_issuer_api'
-require 'decidim/petitions/decode/services/dddc_petitions_api'
-require 'decidim/petitions/decode/services/barcelona_now'
-
 module Decidim
   module Petitions
     module Decode
@@ -15,7 +11,7 @@ module Decidim
 
         def setup_dddc_credentials
           dddc_credentials = Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI.new(
-            Rails.application.secrets.decode[:credential_issuer]
+            Rails.application.secrets.decode[:credential_issuer] || "localhost"
           )
           dddc_credentials.create(
             hash_attributes: true,
@@ -28,7 +24,7 @@ module Decidim
 
         def setup_barcelona_now
           barcelona_now = Decidim::Petitions::Decode::Services::BarcelonaNow.new(
-            Rails.application.secrets.decode[:barcelona_now_dashboard]
+            Rails.application.secrets.decode[:barcelona_now_dashboard] || "localhost"
           )
           barcelona_now.create(
             credential_issuer_url: Rails.application.secrets.decode[:credential_issuer][:url],
@@ -40,15 +36,15 @@ module Decidim
 
         def setup_dddc_petitions
           dddc_petitions = Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
-            Rails.application.secrets.decode[:petitions]
+            Rails.application.secrets.decode[:petitions] || "decode"
           )
           dddc_credentials = Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI.new(
-            Rails.application.secrets.decode[:credential_issuer]
+            Rails.application.secrets.decode[:credential_issuer] || "localhost"
           )
           attribute_info = dddc_credentials.extract_first_attribute_info(@petition.json_attribute_info)
           dddc_petitions.create(
             petition_id: @petition.attribute_id,
-            credential_issuer_url: Rails.application.secrets.decode[:credential_issuer][:url],
+            credential_issuer_url: Rails.application.secrets.decode[:credential_issuer][:url] || "localhost",
             credential_issuer_petition_value: attribute_info
 
           )

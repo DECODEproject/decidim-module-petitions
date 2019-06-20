@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "decidim/petitions/decode/rest_api"
-
 module Decidim
   module Petitions
     module Decode
@@ -11,7 +9,7 @@ module Decidim
 
           include RestApi
 
-          def initialize login
+          def initialize(login)
             # login needs to be a hash with url
             # login = { url: "http://example.com" }
             @login = login

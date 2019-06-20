@@ -1,19 +1,17 @@
 # frozen_string_literal: true
 #
 
-require "decidim/petitions/decode/file_logger"
-
 module Decidim
   module Petitions
     module Decode
       class Zenroom
 
-        extend FileLogger
+        extend Decidim::Petitions::Decode::FileLogger
 
         CONTRACTS_DIR = "#{File.dirname(__FILE__)}/dddc-pilot-contracts"
-        ZENROOM = "#{Rails.root}/bin/zenroom-static"
+        ZENROOM = Gem.bin_path("decidim-petitions")
 
-        def self.hashing data
+        def self.hashing(data)
           # Hashes with zenroom some data. For having better privacy with Credential Issuer.
           #
           `echo "print(ECDH.kdf(HASH.new('sha512'), str('#{data}')))" | #{ZENROOM} 2> /dev/null`.strip

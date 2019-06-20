@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 #
-require "decidim/petitions/decode/rest_api"
-
 module Decidim
   module Petitions
     module Decode

@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 #
 
-require "decidim/petitions/decode/file_logger"
-
 module Decidim
   module Petitions
     module Decode
       module RestApi
 
-        include FileLogger
+        include Decidim::Petitions::Decode::FileLogger
 
         def get_bearer(url: '', username: '', password: '')
           # Gets DDDC's API bearer to have an Authorization

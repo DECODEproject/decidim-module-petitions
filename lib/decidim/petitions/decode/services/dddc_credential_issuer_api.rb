@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 #
-require "decidim/petitions/decode/zenroom"
-require "decidim/petitions/decode/rest_api"
-
 module Decidim
   module Petitions
     module Decode
@@ -10,7 +7,7 @@ module Decidim
         class DDDCCredentialIssuerAPI
           # Integration with https://github.com/DECODEproject/dddc-credential-issuer
 
-          include RestApi
+          include Decidim::Petitions::Decode::RestApi
 
           def initialize login
             # login needs to be a hash with url, username and password
@@ -39,27 +36,24 @@ module Decidim
             wrapper(http_method: :post, http_path: "#{url}/authorizable_attribute/", params: params, bearer: bearer)
           end
 
-          def hash_attribute_info attribute_info
+          def hash_attribute_info(attribute_info)
             # Recieves an attribute info with value_sets on plain text
             # and converts them with a hashing function from zenroom
             #
             logger "*" * 80
             logger "ATTR TO HASH => #{attribute_info} "
-            output = []
-            attribute_info.each do |attribute|
-              hashes = []
-              attribute["value_set"].each do |x|
-                hashes << Decidim::Petitions::Decode::Zenroom.hashing(x)
+            output = attribute_info.map do |attribute|
+              attribute[:value_set] = attribute[:value_set].map do |x|
+                Decidim::Petitions::Decode::Zenroom.hashing(x)
               end
-              attribute["value_set"] = hashes
-              output << attribute
+              attribute
             end
             logger "ATTR HASHED  => #{output} "
             logger "*" * 80
             output
           end
 
-          def extract_first_attribute_info attribute_info
+          def extract_first_attribute_info(attribute_info)
             # Given an attribute_info we delete all the value_sets except the first one (that's also hashed)
             # for being use with Petition API setup
             # input = [{"name"=>"codes", "type"=>"str", "value_set"=>["aaaaa", "bbbbb", "ccccc"]}]
@@ -71,7 +65,6 @@ module Decidim
               attribute["value"] = Decidim::Petitions::Decode::Zenroom.hashing(attribute["value_set"][0])
               attribute.except!("type", "value_set")
             end
-            attribute_info
             logger "ATTR EXTRACTED  => #{attribute_info} "
             logger "*" * 80
             attribute_info
