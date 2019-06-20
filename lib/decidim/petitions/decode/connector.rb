@@ -4,7 +4,6 @@ module Decidim
   module Petitions
     module Decode
       class Connector
-
         def initialize(petition)
           @petition = petition
         end
@@ -46,7 +45,6 @@ module Decidim
             petition_id: @petition.attribute_id,
             credential_issuer_url: Rails.application.secrets.decode[:credential_issuer][:url] || "localhost",
             credential_issuer_petition_value: attribute_info
-
           )
         end
 
@@ -82,10 +80,9 @@ module Decidim
           json_result = JSON.parse(api_result[:response])
           Decidim::Petitions::Decode::Zenroom.count_petition(
             json_tally: json_result["tally"],
-            json_petition: json_result["petition"],
+            json_petition: json_result["petition"]
           )
         end
-
       end
     end
   end
