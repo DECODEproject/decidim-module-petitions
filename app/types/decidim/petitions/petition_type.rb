@@ -24,10 +24,10 @@ module Decidim
       end
       field :attribute_id, !types.String, "Attribute ID for Decode APIs"
       field :credential_issuer_api_url, !types.String, "Credential Issuer API URL for Decode APIs" do
-        resolve ->(obj, _args, _ctx) { Rails.application.secrets.decode[:credential_issuer][:url] }
+        resolve ->(_obj, _args, _ctx) { Rails.application.secrets.decode[:credential_issuer][:url] }
       end
       field :petitions_api_url, !types.String, "Petitions API URL for Decode APIs" do
-        resolve ->(obj, _args, _ctx) { Rails.application.secrets.decode[:petitions][:url] }
+        resolve ->(_obj, _args, _ctx) { Rails.application.secrets.decode[:petitions][:url] }
       end
     end
 

@@ -9,14 +9,14 @@ module Decidim
 
           argument :id, !types.ID, "The petition ID"
 
-          resolve lambda { |_obj, args, ctx|
+          resolve lambda { |_obj, args, _ctx|
             Petition.find_by(id: args[:id])
           }
         end
 
         type.field :petitions do
           type types[PetitionType]
-          resolve lambda { |_obj, _args, ctx|
+          resolve lambda { |_obj, _args, _ctx|
             Petition.all
           }
         end
