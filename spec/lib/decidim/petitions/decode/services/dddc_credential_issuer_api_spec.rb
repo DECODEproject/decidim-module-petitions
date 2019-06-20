@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "decidim/petitions/decode/services/dddc_credential_issuer_api"
+require "spec_helper"
 
 describe Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI do
 
@@ -39,12 +39,12 @@ describe Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI do
           :name=>"zip_code",
           :type=>"int",
           :value_set=>[
-            "ae9c05449e6643e5e7630d7e69985d1882aac405e03cbb8b4bf580b59fa7e744eec3cf2983301d3ec9c9610cfa1eb0daecc4b95e6cb392ee27f66c870eb49236",
-            "6285f7542a8851fe6249ad0888222b1dd66c5f0f8a53e9199c99b8dcbc4a0935ee4c754319746cd85d105cc684062590a4769aab2a2badd11c5f42bea24cacd4"
+            "61d96ba82aa2368f51fbc79675b513f5ff8c14ecfb5fb946891e1bc909f47e4eaf2e16d59ec4774552dbda8951050a020b31c57687f8cc783e5ce63ee2b4fb6c",
+            "713629bcec4a8e51543b4f9fa87015fdcd838ccf2ae184a546f422224469c6ad1f5ca5c850848437702136af9ec61c4ba02183e4f02a14bbbb918526c51ffb5b"
           ]
         }
       ]
-      result = dddc_credentials.hash_attribute_info input
+      result = dddc_credentials.hash_attribute_info(input)
       expect(result).to eq output
     end
 

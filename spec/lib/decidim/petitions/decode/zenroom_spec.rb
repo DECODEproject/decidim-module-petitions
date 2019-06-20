@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-
-require 'decidim/petitions/decode/zenroom'
+require "spec_helper"
 
 describe Decidim::Petitions::Decode::Zenroom do
 
