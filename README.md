@@ -1,7 +1,7 @@
 # Digital Democracy and Data Commons for Barcelona
 [![Build Status](https://img.shields.io/circleci/project/github/alabs/decidim-module-petitions/master.svg)](https://circleci.com/gh/alabs/decidim-module-petitions)
-![Coverage](https://img.shields.io/codeclimate/coverage/alabs/decidim-module-petitions.svg)
-![Maintainability](https://img.shields.io/codeclimate/maintainability/alabs/decidim-module-petitions.svg)
+[![Coverage](https://img.shields.io/codeclimate/coverage/alabs/decidim-module-petitions.svg)](https://codeclimate.com/github/alabs/decidim-module-petitions)
+[![Maintainability](https://img.shields.io/codeclimate/maintainability/alabs/decidim-module-petitions.svg)](https://codeclimate.com/github/alabs/decidim-module-petitions)
 
 This is the open-source repository for DDDC, based on [Decidim](https://github.com/decidim/decidim),
 implementing the [DECODE](https://decodeproject.eu/) prototypes.
