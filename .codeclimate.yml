@@ -69,4 +69,3 @@ plugins:
       - "**/*/*.svg"
   markdownlint:
     enabled: true
-    exclude_patterns:
