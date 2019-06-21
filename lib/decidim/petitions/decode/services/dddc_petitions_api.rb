@@ -9,14 +9,18 @@ module Decidim
 
           include RestApi
 
-          def initialize login
+          def initialize(login)
             # login needs to be a hash with url, username and password
             # login = { url: "http://example.com", username: "demo", password: "demo"}
             @login = login
-            @bearer = get_bearer( url: @login[:url], username: @login[:username], password: @login[:password])
+            @bearer = get_bearer(
+              url: @login[:url],
+              username: @login[:username],
+              password: @login[:password]
+            )
           end
 
-          def create(petition_id: '', credential_issuer_url: '', credential_issuer_petition_value: '')
+          def create(petition_id: "", credential_issuer_url: "", credential_issuer_petition_value: "")
             # Creates the petition. Needs a valid Credential Issuer Authorizable Attribute.
             #
             params = {
@@ -28,27 +32,38 @@ module Decidim
             wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/", bearer: @bearer, params: params)
           end
 
-          def tally(petition_id: '')
+          def tally(petition_id: "")
             # Tally the petition
             #
             params = {
               authorizable_attribute_id: petition_id
             }
-            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/#{petition_id}/tally", bearer: @bearer, params: params)
+            wrapper(
+              http_method: :post,
+              http_path: "#{@login[:url]}/petitions/#{petition_id}/tally",
+              bearer: @bearer,
+              params: params
+            )
           end
 
-          def count(petition_id: '')
+          def count(petition_id: "")
             # Count the petition
             #
-            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/#{petition_id}/count", bearer: @bearer)
+            wrapper(
+              http_method: :post,
+              http_path: "#{@login[:url]}/petitions/#{petition_id}/count",
+              bearer: @bearer
+            )
           end
 
-          def get(petition_id: '')
+          def fetch(petition_id: "")
             # Get the petition with extended information
             #
-            wrapper(http_method: :get, http_path: "#{@login[:url]}/petitions/#{petition_id}?expand=true")
+            wrapper(
+              http_method: :get,
+              http_path: "#{@login[:url]}/petitions/#{petition_id}?expand=true"
+            )
           end
-
         end
       end
     end

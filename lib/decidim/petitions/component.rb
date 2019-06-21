@@ -9,6 +9,16 @@ Decidim.register_component(:petitions) do |component|
 
   component.permissions_class_name = "Decidim::Petitions::Permissions"
 
+  component.settings(:global) do |settings|
+    settings.attribute :credential_issuer_api_url, type: :string, default: "https://credentials.decodeproject.eu"
+    settings.attribute :credential_issuer_api_user, type: :string, default: "", required: false
+    settings.attribute :credential_issuer_api_pass, type: :string, default: "", required: false
+    settings.attribute :petitions_api_url, type: :string, default: "https://petitions.decodeproject.eu"
+    settings.attribute :petitions_api_user, type: :string, default: "", required: false
+    settings.attribute :petitions_api_pass, type: :string, default: "", required: false
+    settings.attribute :dashboard_api_url, type: :string, default: "https://dashboard.decodeproject.eu"
+  end
+
   component.settings(:step) do |settings|
     settings.attribute :announcement, type: :text, translated: true, editor: true
     settings.attribute :votes_enabled, type: :boolean

@@ -35,7 +35,7 @@ module Decidim
           enforce_permission_to :update, :petition, petition: petition
           @form = form(PetitionForm).from_params(params, current_component: current_component)
 
-          UpdatePetition.call(@form, petition) do
+          UpdatePetition.call(petition, @form) do
             on(:ok) do
               flash[:notice] = I18n.t("petitions.update.success", scope: "decidim.petitions.admin")
               redirect_to petitions_path
@@ -48,24 +48,14 @@ module Decidim
           end
         end
 
-        def destroy
-          enforce_permission_to :destroy, :petition, petition: petition
-
-          DestroyPetition.call(petition) do
-            on(:ok) do
-              flash[:notice] = I18n.t("petitions.destroy.success", scope: "decidim.petitions.admin")
-              redirect_to petitions_path
-            end
-          end
-        end
-
-        def activate
-          enforce_permission_to :update, :petition, petition: petition
-
-          ActivatePetition.call(petition) do
-            on(:ok) do
-              flash[:notice] = I18n.t("petitions.activate.success", scope: "decidim.petitions.admin")
-              redirect_to petitions_path
+        %w(destroy activate deactivate).each do |method|
+          define_method :"#{method}" do
+            "Decidim::Petitions::Admin::#{method.capitalize}Petition".constantize.call(petition) do
+              enforce_permission_to :manage, :petition, petition: petition
+              on(:ok) do
+                flash[:notice] = I18n.t("petitions.#{method}.success", scope: "decidim.petitions.admin")
+                redirect_to petitions_path
+              end
             end
           end
         end
@@ -77,17 +67,6 @@ module Decidim
           DecodeConnector.call(petition, params[:command]) do
             on(:ok) do
               flash[:notice] = I18n.t("petitions.decode.success.#{params[:command]}", scope: "decidim.petitions.admin")
-              redirect_to petitions_path
-            end
-          end
-        end
-
-        def deactivate
-          enforce_permission_to :update, :petition, petition: petition
-
-          DeactivatePetition.call(petition) do
-            on(:ok) do
-              flash[:notice] = I18n.t("petitions.deactivate.success", scope: "decidim.petitions.admin")
               redirect_to petitions_path
             end
           end

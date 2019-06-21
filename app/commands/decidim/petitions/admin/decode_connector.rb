@@ -7,7 +7,7 @@ module Decidim
         def initialize(petition, command)
           @petition = petition
           @command = command
-          @connector = Decidim::Petitions::Decode::Connector.new(petition)
+          @connector = Decidim::Petitions::Decode::Connector.new(petition, current_component)
         end
 
         def call
@@ -46,7 +46,7 @@ module Decidim
         end
 
         def get
-          @connector.get_dddc_petitions
+          @connector.fetch_dddc_petitions
         end
 
         def tally

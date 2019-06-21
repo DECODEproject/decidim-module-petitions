@@ -11,9 +11,9 @@ module Decidim
         translatable_attribute :description, String
         translatable_attribute :instructions_url, String
         attribute :image
-        attribute :json_schema, JSON
-        attribute :json_attribute_info, JSON
-        attribute :json_attribute_info_optional, JSON
+        attribute :json_schema, SchemaAttribute, default: {}
+        attribute :json_attribute_info, SchemaAttribute, default: {}
+        attribute :json_attribute_info_optional, SchemaAttribute, default: {}
         attribute :is_reissuable
 
         mimic :petition
@@ -23,6 +23,16 @@ module Decidim
         validates :image, file_size: {
           less_than_or_equal_to: ->(_record) { Decidim.maximum_attachment_size }
         }, file_content_type: { allow: ["image/jpeg", "image/png"] }
+
+        # %w(json_schema json_attribute_info json_attribute_info_optional).each do |attr|
+        #   define_method "#{attr}=" do |val|
+        #     if val.class == Hash
+        #       super val.to_json
+        #     else
+        #       super JSON.parse(val)
+        #     end
+        #   end
+        # end
       end
     end
   end
