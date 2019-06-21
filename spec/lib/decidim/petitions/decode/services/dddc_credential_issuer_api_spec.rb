@@ -3,15 +3,13 @@
 require "spec_helper"
 
 describe Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI do
-
-  context "should create work" do
-
-    it "should .create work" do
-      # TODO implement
+  context "when create work" do
+    it ".create work" do
+      # TODO: implement
     end
 
-    it "should .hash_attribute_info work" do
-      dddc_credentials = Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI.new("http://credentials.example.com")
+    it ".hash_attribute_info work" do
+      dddc_credentials = described_class.new("http://credentials.example.com")
       input = [
         {
           "name": "email",
@@ -22,10 +20,10 @@ describe Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI do
         }, {
           "name": "zip_code",
           "type": "int",
-          "value_set": [
-            "08001",
-            "08002"
-          ]
+          "value_set": %w(
+            08001
+            08002
+          )
         }
       ]
       output = [
@@ -38,15 +36,14 @@ describe Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI do
         }, {
           name: "zip_code",
           type: "int",
-          value_set: [
-            "61d96ba82aa2368f51fbc79675b513f5ff8c14ecfb5fb946891e1bc909f47e4eaf2e16d59ec4774552dbda8951050a020b31c57687f8cc783e5ce63ee2b4fb6c",
-            "713629bcec4a8e51543b4f9fa87015fdcd838ccf2ae184a546f422224469c6ad1f5ca5c850848437702136af9ec61c4ba02183e4f02a14bbbb918526c51ffb5b"
-          ]
+          value_set: %w(
+            61d96ba82aa2368f51fbc79675b513f5ff8c14ecfb5fb946891e1bc909f47e4eaf2e16d59ec4774552dbda8951050a020b31c57687f8cc783e5ce63ee2b4fb6c
+            713629bcec4a8e51543b4f9fa87015fdcd838ccf2ae184a546f422224469c6ad1f5ca5c850848437702136af9ec61c4ba02183e4f02a14bbbb918526c51ffb5b
+          )
         }
       ]
       result = dddc_credentials.hash_attribute_info(input)
       expect(result).to eq output
     end
-
   end
 end
