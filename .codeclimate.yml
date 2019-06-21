@@ -48,6 +48,8 @@ plugins:
     enabled: false
   fixme:
     enabled: true
+    exclude_patterns:
+      - .rubocop.yml
   grep:
     enabled: true
     config:
@@ -67,3 +69,4 @@ plugins:
       - "**/*/*.svg"
   markdownlint:
     enabled: true
+    exclude_patterns:

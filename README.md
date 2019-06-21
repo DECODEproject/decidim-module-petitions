@@ -11,9 +11,11 @@ implementing the [DECODE](https://decodeproject.eu/) prototypes.
 
 Add this line to your Gemfile:
 
-´´´ruby
+```ruby
 
-gem "decidim-petitions", git: "https://github.com/alabs/decidim-module-petitions", branch: "0.17-stable"
+gem "decidim-petitions",
+    git: "https://github.com/alabs/decidim-module-petitions",
+    branch: "0.17-stable"
 
 ```
 
