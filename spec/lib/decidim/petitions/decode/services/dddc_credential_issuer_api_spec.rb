@@ -4,10 +4,6 @@ require "spec_helper"
 
 describe Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI do
   context "when create work" do
-    it ".create work" do
-      # TODO: implement
-    end
-
     it ".hash_attribute_info work" do
       dddc_credentials = described_class.new("http://credentials.example.com")
       input = [
