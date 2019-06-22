@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Decidim
   module Petitions
     class Petition < Petitions::ApplicationRecord
@@ -7,6 +9,9 @@ module Decidim
       include Decidim::Resourceable
 
       mount_uploader :image, Decidim::Petitions::ImageUploader
+
+      validates :title, :description, :summary, presence: true
+      validate :author_belong_to_organization
 
       scope :closed, -> { where(state: "closed") }
       scope :opened, -> { where(state: "opened") }
@@ -24,7 +29,8 @@ module Decidim
       end
 
       def attribute_id
-        (Decidim.config.application_name + "-" + title["en"]).downcase.tr(" ", "-")
+        # (Decidim.config.application_name + "-" + title["en"]).downcase.tr(" ", "-")
+        "#{Decidim.config.application_name}-#{title["en"].parameterize}"
       end
 
       def closed?
@@ -33,6 +39,14 @@ module Decidim
 
       def opened?
         state == "opened"
+      end
+
+      private
+
+      def author_belong_to_organization
+        return if !author || !organization
+
+        errors.add(:author, :invalid) unless author.organization == organization
       end
     end
   end
