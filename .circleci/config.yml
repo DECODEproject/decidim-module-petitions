@@ -61,7 +61,7 @@ jobs:
 
       - run:
           name: Convert Codeclimate coverage
-          command: ./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.$CIRCLE_JOB.json coverage/.resultset.json 
+          command: ./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.$CIRCLE_JOB.json coverage/.resultset.json
 
       - run:
           name: Upload CodeClimate test coverage
