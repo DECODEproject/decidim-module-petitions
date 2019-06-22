@@ -34,6 +34,8 @@ checks:
 plugins:
   bundler-audit:
     enabled: true
+  csslint:
+    enabled: true
   duplication:
     enabled: true
     config:
@@ -69,3 +71,11 @@ plugins:
       - "**/*/*.svg"
   markdownlint:
     enabled: true
+  stylelint:
+    enabled: true
+exclude_patterns:
+  - "**/vendor/"
+  - "node_modules/"
+  - "development_app/"
+  - "spec/decidim_dummy_app/"
+  - "coverage/"
