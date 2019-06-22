@@ -165,6 +165,19 @@ An example with curl:
 
 curl 'https://betadddc.alabs.org/api' \
     -H 'content-type: application/json' \
-    --data '{"query":"{ petition(id:\"1\") { id, title, description, author, json_schema, image, credential_issuer_api_url, petitions_api_url, attribute_id } }"}'
+    --data '{
+      "query":"{
+        petition(id:\"1\") {
+          id,
+          title,
+          description,
+          author,
+          json_schema,
+          image,
+          credential_issuer_api_url,
+          petitions_api_url,
+          attribute_id
+        }}"
+      }'
 
 ```
