@@ -18,7 +18,7 @@ module Decidim
       end
 
       def badge_name
-       I18n.t(state, scope: "decidim.petitions.states")
+        I18n.t(state, scope: "decidim.petitions.states")
       end
 
       def state_classes
@@ -31,7 +31,7 @@ module Decidim
           ["muted"]
         end
       end
-        
+
       def body
         translated_attribute(present(model).summary)
       end
