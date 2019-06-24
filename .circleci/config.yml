@@ -8,7 +8,6 @@ jobs:
       - image: decidim/decidim:latest
         environment:
           RAILS_ENV: test
-          BUNDLER_VERSION: 2.0.1
           TEST_REPORT_PATH: "test/reports"
           SIMPLECOV: true
           DATABASE_USERNAME: postgres
@@ -27,7 +26,7 @@ jobs:
           command: |
             echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
             source $BASH_ENV
-            gem install bundler
+            gem install bundler -v $BUNDLER_VERSION
 
       - restore_cache:
           keys:
