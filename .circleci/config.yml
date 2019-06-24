@@ -5,7 +5,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: decidim/decidim:latest
+      - image: circleci/ruby:2.5.3
         environment:
           RAILS_ENV: test
           TEST_REPORT_PATH: "test/reports"
@@ -15,8 +15,6 @@ jobs:
       - image: postgres
         environment:
           POSTGRES_USER: postgres
-
-    working_directory: /app
 
     steps:
       - checkout
@@ -46,10 +44,6 @@ jobs:
           key: bundler-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-
-      - run:
-          name: Wait for db
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
           name: Generate test app
