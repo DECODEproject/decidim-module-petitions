@@ -23,16 +23,6 @@ module Decidim
         validates :image, file_size: {
           less_than_or_equal_to: ->(_record) { Decidim.maximum_attachment_size }
         }, file_content_type: { allow: ["image/jpeg", "image/png"] }
-
-        # %w(json_schema json_attribute_info json_attribute_info_optional).each do |attr|
-        #   define_method "#{attr}=" do |val|
-        #     if val.class == Hash
-        #       super val.to_json
-        #     else
-        #       super JSON.parse(val)
-        #     end
-        #   end
-        # end
       end
     end
   end
