@@ -34,6 +34,7 @@ Decidim.register_component(:petitions) do |component|
   end
 
   component.seeds do |participatory_space|
+    seeds_root = File.join(__dir__, "..", "..", "..", "db", "seeds")
     component = Decidim::Component.create!(
       name: Decidim::Components::Namer.new(participatory_space.organization.available_locales, :petitions).i18n_name,
       manifest_name: :petitions,
@@ -49,6 +50,7 @@ Decidim.register_component(:petitions) do |component|
           Decidim::Faker::Localized.paragraph(3)
         end,
         summary: Decidim::Faker::Localized.paragraph(1),
+        image: File.new(File.join(seeds_root, "petition.png")),
         author: author,
         json_schema: {
           "mandatory": [
