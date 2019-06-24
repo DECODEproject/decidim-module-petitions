@@ -5,6 +5,7 @@ require "decidim/petitions/engine"
 require "decidim/petitions/admin_engine"
 require "decidim/petitions/component"
 require "decidim/petitions/decode"
+require "decidim/petitions/query_extensions"
 require "decidim/petitions/schema_attribute"
 
 module Decidim
