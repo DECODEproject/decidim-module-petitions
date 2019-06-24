@@ -5,7 +5,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: decidim/decidim@sha256:348fb1faa49cfe76ba7cbeafc67ca09002cf95f0ffa7a76eefa9d5b3774e0ee9
+      - image: decidim/decidim:latest
         environment:
           RAILS_ENV: test
           BUNDLER_VERSION: 2.0.1
