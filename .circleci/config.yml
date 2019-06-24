@@ -12,7 +12,7 @@ jobs:
           SIMPLECOV: true
           DATABASE_USERNAME: postgres
 
-      - image: postgres
+      - image: circleci/postgres:latest
         environment:
           POSTGRES_USER: postgres
 
