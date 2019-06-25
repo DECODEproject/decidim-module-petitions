@@ -12,6 +12,7 @@ gem "uglifier", "~> 4.1"
 
 group :development, :test do
   gem "byebug", "~> 10.0", platform: :mri
+  gem "sinatra", "~> 2.0"
 
   gem "decidim-dev"
 end
