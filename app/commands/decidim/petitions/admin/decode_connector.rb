@@ -7,17 +7,19 @@ module Decidim
         def initialize(petition, command)
           @petition = petition
           @command = command
-          @connector = Decidim::Petitions::Decode::Connector.new(petition, current_component)
+          @connector = Decidim::Petitions::Decode::Connector.new(petition)
         end
 
         def call
-          decode_command
-          broadcast(:ok) if flash[:error].nil? && flash[:warning].nil?
+          result = decode_command
+          return broadcast(:invalid, result) unless result[:status_code] == 200
+
+          broadcast(:ok, result)
         end
 
         private
 
-        attr_reader :petition
+        attr_reader :petition, :command, :connector
 
         def decode_command
           # Wrapper for decode commands
@@ -25,16 +27,11 @@ module Decidim
           # It should always responds with a { status_code: XX } at least
           # Could also have { status_code: XX, response: "YYY" }
           #
-          result = send(@command)
-          unless result[:status_code] == 200
-            # Status Code 409 is Conflict, as in "there's already that content on the API"
-            flash[:warning] = t(".duplicated.#{@command}", status_code: result[:status_code]) if result[:status_code] == 409
-            flash[:error] = t(".errors.#{@command}", status_code: result[:status_code])
-          end
+          send(command)
         end
 
         def credential_issuer
-          @connector.setup_dddc_credentials
+          connector.setup_dddc_credentials
         end
 
         def barcelona_now_dashboard

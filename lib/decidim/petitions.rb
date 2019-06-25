@@ -4,15 +4,15 @@ require "decidim/petitions/admin"
 require "decidim/petitions/engine"
 require "decidim/petitions/admin_engine"
 require "decidim/petitions/component"
-require "decidim/petitions/decode"
-require "decidim/petitions/query_extensions"
-require "decidim/petitions/schema_attribute"
-require "decidim/petitions/faker"
 
 module Decidim
   # This namespace holds the logic of the `Petitions` component. This component
   # allows users to create petitions in a participatory space.
   module Petitions
+    autoload :Decode, "decidim/petitions/decode"
+    autoload :Faker, "decidim/petitions/faker"
+    autoload :QueryExtensions, "decidim/petitions/query_extensions"
+    autoload :SchemaAttribute, "decidim/petitions/schema_attribute"
     autoload :ViewModel, "decidim/petitions/view_model"
   end
 end

@@ -4,9 +4,8 @@ module Decidim
   module Petitions
     module Decode
       class Connector
-        def initialize(petition, component)
+        def initialize(petition)
           @petition = petition
-          @component = component
         end
 
         def setup_dddc_credentials
@@ -14,10 +13,10 @@ module Decidim
             settings_credentials_issuer_api
           ).create(
             hash_attributes: true,
-            reissuable: @petition.is_reissuable,
-            attribute_id: @petition.attribute_id,
-            attribute_info: @petition.json_attribute_info,
-            attribute_info_optional: @petition.json_attribute_info_optional
+            reissuable: petition.is_reissuable,
+            attribute_id: petition.attribute_id,
+            attribute_info: petition.json_attribute_info,
+            attribute_info_optional: petition.json_attribute_info_optional
           )
         rescue Errno::EADDRNOTAVAIL
           { status_code: 500 }
@@ -73,6 +72,8 @@ module Decidim
 
         private
 
+        attr_reader :petition
+
         def dddc_petitions
           Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
             settings_petitions_api
@@ -81,9 +82,9 @@ module Decidim
 
         def settings_credentials_issuer_api
           {
-            url: @component.settings.credential_issuer_api_url,
-            user: @component.settings.credential_issuer_api_user,
-            password: @component.settings.credential_issuer_api_pass
+            url: petition.component.settings.credential_issuer_api_url,
+            username: petition.component.settings.credential_issuer_api_user,
+            password: petition.component.settings.credential_issuer_api_pass
           }
         end
 
