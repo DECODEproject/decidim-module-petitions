@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "open3"
+
 module Decidim
   module Petitions
     module Decode
@@ -12,7 +14,8 @@ module Decidim
         def self.hashing(data)
           # Hashes with zenroom some data. For having better privacy with Credential Issuer.
           #
-          `echo "print(ECDH.kdf(HASH.new('sha512'), str('#{data}')))" | #{ZENROOM} 2> /dev/null`.strip
+          hash, _status = Open3.capture2(ZENROOM, "-p", "print(ECDH.kdf(HASH.new('sha512'), str('#{data}')))")
+          hash.strip
         end
 
         def self.write_to_tmp_file(filename, contents)
