@@ -19,32 +19,21 @@ module Decidim::Petitions
     let(:participatory_process) { create :participatory_process, organization: organization }
     let(:current_component) { create :component, participatory_space: participatory_process, manifest_name: "petitions" }
     let(:author) { create(:user, :admin, organization: organization) }
-    let(:json_schema) do
-      {
-        json: "true"
-      }
-    end
 
-    let(:title) do
-      Decidim::Faker::Localized.sentence(3)
-    end
-    let(:description) do
-      Decidim::Faker::Localized.sentence(3)
-    end
-    let(:summary) do
-      Decidim::Faker::Localized.sentence(3)
-    end
+    let(:title) { Decidim::Faker::Localized.sentence(3) }
+    let(:description) { Decidim::Faker::Localized.paragraph(2) }
+    let(:summary) { Decidim::Faker::Localized.paragraph(2) }
     let(:attachment) { Decidim::Dev.test_file("city2.jpeg", "image/jpeg") }
 
     let(:attributes) do
       {
-        title_en: title[:en],
+        title: title,
         author: author,
-        description_en: description[:en],
-        summary_en: summary[:en],
-        json_schema: json_schema,
-        json_attribute_info: json_schema,
-        json_attribute_info_optional: json_schema,
+        description: description,
+        summary: summary,
+        json_schema: Faker.json_schema,
+        json_attribute_info: Faker.json_attribute_info,
+        json_attribute_info_optional: Faker.json_attribute_info_optional,
         image: attachment
       }
     end
@@ -52,19 +41,19 @@ module Decidim::Petitions
     it { is_expected.to be_valid }
 
     describe "when title is missing" do
-      let(:title) { { en: nil } }
+      let(:title) { nil }
 
       it { is_expected.not_to be_valid }
     end
 
     describe "when description is missing" do
-      let(:description) { { en: nil } }
+      let(:description) { nil }
 
       it { is_expected.not_to be_valid }
     end
 
     describe "when summary is missing" do
-      let(:summary) { { en: nil } }
+      let(:summary) { nil }
 
       it { is_expected.not_to be_valid }
     end

@@ -7,6 +7,7 @@ require "decidim/petitions/component"
 require "decidim/petitions/decode"
 require "decidim/petitions/query_extensions"
 require "decidim/petitions/schema_attribute"
+require "decidim/petitions/faker"
 
 module Decidim
   # This namespace holds the logic of the `Petitions` component. This component

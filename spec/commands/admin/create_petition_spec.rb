@@ -11,69 +11,9 @@ module Decidim::Petitions
     let(:invalid) { false }
     let(:current_component) { create :petitions_component, organization: organization }
     let(:current_user) { create :user, :admin, :confirmed, organization: organization }
-    let(:json_schema) do
-      <<-JSON
-      {
-        "mandatory": [
-          {
-            "predicate": "schema:addressLocality",
-            "object": "Barcelona",
-            "scope": "can-access",
-            "provenance": {
-              "url": "http://example.com"
-            }
-          }
-        ],
-        "optional": [
-          {
-            "predicate": "schema:dateOfBirth",
-            "object": "voter",
-            "scope": "can-access"
-          },
-          {
-            "predicate": "schema:gender",
-            "object": "voter",
-            "scope": "can-access"
-          }
-        ]
-      }
-      JSON
-    end
-    let(:json_attribute_info) do
-      <<-JSON
-      [
-        {
-          "name": "codes",
-          "type": "str",
-          "value_set": ["eih5O", "nuu3S", "Pha6x", "lahT4", "Ri3ex"]
-        }
-      ]
-      JSON
-    end
-    let(:json_attribute_info_optional) do
-      <<-JSON
-      [
-        {
-          "k": 2,
-          "name": "age",
-          "type": "str",
-          "value_set": ["0-19", "20-29", "30-39", ">40"]
-        },
-        {
-          "k": 2,
-          "name": "gender",
-          "type": "str",
-          "value_set": ["F", "M", "O"]
-        },
-        {
-          "k": 2,
-          "name": "district",
-          "type": "str",
-          "value_set": ["1", "2", "3", "4", "5"]
-        }
-      ]
-      JSON
-    end
+    let(:json_schema) { Faker.json_schema.to_json }
+    let(:json_attribute_info) { Faker.json_attribute_info.to_json }
+    let(:json_attribute_info_optional) { Faker.json_attribute_info_optional }
 
     let(:form) do
       double(
