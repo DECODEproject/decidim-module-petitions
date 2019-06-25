@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-#
 
 require "logger"
 
@@ -7,12 +6,11 @@ module Decidim
   module Petitions
     module Decode
       module FileLogger
-
         def decode_logger
-          @@decode_logger ||= Logger.new("#{Rails.root}/log/decode.log")
+          @decode_logger ||= Logger.new("#{Rails.root}/log/decode.log")
         end
 
-        def logger message
+        def logger(message)
           # Log with Rails.logger or just to stdout for Heroku
           #
           if ENV["RAILS_LOG_TO_STDOUT"]&.present?
@@ -32,7 +30,6 @@ module Decidim
           logger "HEADERS     => #{resp.headers}"
           logger("*" * 80)
         end
-
       end
     end
   end

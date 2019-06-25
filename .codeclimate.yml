@@ -71,6 +71,8 @@ plugins:
       - "**/*/*.svg"
   markdownlint:
     enabled: true
+  rubocop:
+    enabled: true
   stylelint:
     enabled: true
 exclude_patterns:

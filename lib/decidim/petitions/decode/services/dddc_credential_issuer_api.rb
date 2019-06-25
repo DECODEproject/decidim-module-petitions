@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-#
+
 module Decidim
   module Petitions
     module Decode
@@ -9,7 +9,7 @@ module Decidim
 
           include Decidim::Petitions::Decode::RestApi
 
-          def initialize login
+          def initialize(login)
             # login needs to be a hash with url, username and password
             # login = { url: "http://example.com", username: "demo", password: "demo"}
             @login = login
@@ -17,16 +17,16 @@ module Decidim
 
           def create(hash_attributes: false,
                      reissuable: false,
-                     attribute_id: '',
-                     attribute_info: '',
-                     attribute_info_optional: ''
-                    )
+                     attribute_id: "",
+                     attribute_info: "",
+                     attribute_info_optional: "")
+
             # Setup the Authorizable Attribute to Credential Issuer's API
             # If hash_attributes is true, then we hash the attribute_info with zenroom
             # If reissuable is true, then we send that configuration to Credential Issuer
             #
             url = @login[:url]
-            bearer = get_bearer( url: url, username: @login[:username], password: @login[:password])
+            bearer = get_bearer(url: url, username: @login[:username], password: @login[:password])
             attribute_info = hash_attributes ? hash_attribute_info(attribute_info) : attribute_info
             attribute_info_optional = hash_attributes ? hash_attribute_info(attribute_info_optional) : attribute_info_optional
             params = { authorizable_attribute_id: attribute_id,
@@ -69,7 +69,6 @@ module Decidim
             logger "*" * 80
             attribute_info
           end
-
         end
       end
     end

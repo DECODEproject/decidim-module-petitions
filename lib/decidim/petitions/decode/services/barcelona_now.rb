@@ -15,7 +15,7 @@ module Decidim
             @login = login
           end
 
-          def create(credential_issuer_url: '', community_name: '', community_id: '', attribute_id: '')
+          def create(credential_issuer_url: "", community_name: "", community_id: "", attribute_id: "")
             # Setup the Barcelona Now Dashboard API
             #
             params = { community_name: community_name,
@@ -24,7 +24,6 @@ module Decidim
                        credential_issuer_endpoint_address: credential_issuer_url }
             wrapper(http_method: :post, http_path: "#{@login[:url]}/community/create_encrypted", params: params)
           end
-
         end
       end
     end

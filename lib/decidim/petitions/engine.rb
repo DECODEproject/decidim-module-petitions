@@ -15,7 +15,7 @@ module Decidim
       end
 
       initializer "decidim_petitions.assets" do |app|
-        app.config.assets.precompile += %w[decidim_petitions_manifest.js decidim_petitions_manifest.css]
+        app.config.assets.precompile += %w(decidim_petitions_manifest.js decidim_petitions_manifest.css)
       end
 
       initializer "decidim_petitions.query_extensions" do
