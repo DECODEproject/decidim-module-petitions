@@ -27,17 +27,11 @@ module Decidim
           ["success"]
         when "closed"
           ["warning"]
-        else
-          ["muted"]
         end
       end
 
-      def body
-        translated_attribute(present(model).summary)
-      end
-
       def description
-        html_truncate(decidim_sanitize(translated_attribute(present(model).summary)), length: 100)
+        html_truncate(decidim_sanitize(translated_attribute(present(model).description)), length: 100)
       end
 
       def resource_image_path

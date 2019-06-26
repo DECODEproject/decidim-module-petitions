@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MakePetitionAuthorsPolymorphic < ActiveRecord::Migration[5.2]
   class Petition < ApplicationRecord
     self.table_name = :decidim_petitions_petitions

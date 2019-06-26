@@ -9,10 +9,6 @@ module Decidim
       include Decidim::TranslationsHelper
       include Decidim::ResourceHelper
 
-      def petition_description(petition)
-        translated_attribute(petition.description)
-      end
-
       def decodewallet_button(petition)
         link_to t("open_wallet", scope: "decidim.petitions.petitions.petition"), decode_url(petition), class: "button expanded button--sc"
       end
@@ -33,6 +29,8 @@ module Decidim
           file: nil # path to write
         ).to_s)
       end
+
+      private
 
       def exp_url(petition)
         "//exp.host/@decode-barcelona/decode-walletapp?release-channel=production&mobile=true&decidimAPIUrl=#{decidim_api.root_url}&petitionId=#{petition.id}"

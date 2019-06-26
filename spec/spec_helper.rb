@@ -9,6 +9,11 @@ Decidim::Dev.dummy_app_path =
   File.expand_path(File.join(__dir__, "decidim_dummy_app"))
 
 require "decidim/dev/test/base_spec_helper"
+require "support/fake_credential_issuer_api"
+require "support/fake_petitions_api"
+
+require "webmock/rspec"
+WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
   config.before do

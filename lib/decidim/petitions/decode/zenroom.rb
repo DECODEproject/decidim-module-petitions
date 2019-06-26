@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "open3"
+
 module Decidim
   module Petitions
     module Decode
@@ -12,7 +14,8 @@ module Decidim
         def self.hashing(data)
           # Hashes with zenroom some data. For having better privacy with Credential Issuer.
           #
-          `echo "print(ECDH.kdf(HASH.new('sha512'), str('#{data}')))" | #{ZENROOM} 2> /dev/null`.strip
+          hash, _status = Open3.capture2(ZENROOM, "-p", "print(ECDH.kdf(HASH.new('sha512'), str('#{data}')))")
+          hash.strip
         end
 
         def self.write_to_tmp_file(filename, contents)
@@ -27,7 +30,7 @@ module Decidim
           # Counts the petition given a tally.json and petition.json with the contract
           # from DECODE's dddc-pilot-contracts.
           #
-          # FIXME: it shouldn't be the same tally / petition for all the petitions
+          # It shouldn't be the same tally / petition for all the petitions
           contract = "#{CONTRACTS_DIR}/14-CITIZEN-count-petition.zencode"
           tally_file_path = write_to_tmp_file("tally.json", JSON.unparse(json_tally))
           petition_file_path = write_to_tmp_file("petition.json", JSON.unparse(json_petition))

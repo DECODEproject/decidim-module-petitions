@@ -14,6 +14,9 @@ module Decidim::Petitions
           description_en: "Foo description",
           description_es: "Foo description",
           description_ca: "Foo description",
+          summary_en: "Foo summary",
+          summary_es: "Foo summary",
+          summary_ca: "Foo summary",
           image: petition.image,
           json_schema: petition.json_schema,
           json_attribute_info: petition.json_attribute_info,
@@ -52,6 +55,18 @@ module Decidim::Petitions
 
       it "broadcasts invalid" do
         expect { command.call }.to broadcast(:invalid)
+      end
+    end
+
+    describe "when the petition is valid" do
+      it "broadcast ok" do
+        expect { command.call }.to broadcast(:ok)
+      end
+
+      it "update the petition" do
+        command.call
+        petition.reload
+        expect(petition.title["en"]).to eq "Foo title"
       end
     end
   end

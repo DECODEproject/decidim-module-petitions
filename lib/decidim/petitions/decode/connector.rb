@@ -4,25 +4,20 @@ module Decidim
   module Petitions
     module Decode
       class Connector
-        def initialize(petition, component)
+        def initialize(petition)
           @petition = petition
-          @component = component
         end
 
         def setup_dddc_credentials
           Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI.new(
             settings_credentials_issuer_api
           ).create(
+            attribute_id: petition.attribute_id,
+            attribute_info: petition.json_attribute_info,
+            attribute_info_optional: petition.json_attribute_info_optional,
             hash_attributes: true,
-            reissuable: @petition.is_reissuable,
-            attribute_id: @petition.attribute_id,
-            attribute_info: @petition.json_attribute_info,
-            attribute_info_optional: @petition.json_attribute_info_optional
+            reissuable: petition.is_reissuable
           )
-        rescue Errno::EADDRNOTAVAIL
-          { status_code: 500 }
-        rescue RestClient::UnprocessableEntity
-          { status_code: 422 }
         end
 
         def setup_barcelona_now
@@ -44,8 +39,8 @@ module Decidim
 
         def create_dddc_petition
           dddc_petitions.create(
-            petition_id: @petition.attribute_id,
-            credential_issuer_url: settings_credentials_issuer_api.url,
+            petition_id: petition.attribute_id,
+            credential_issuer_url: petition.component.settings.credential_issuer_api_url,
             credential_issuer_petition_value: petition_value
           )
         end
@@ -73,6 +68,8 @@ module Decidim
 
         private
 
+        attr_reader :petition
+
         def dddc_petitions
           Decidim::Petitions::Decode::Services::DDDCPetitionsAPI.new(
             settings_petitions_api
@@ -81,9 +78,9 @@ module Decidim
 
         def settings_credentials_issuer_api
           {
-            url: @component.settings.credential_issuer_api_url,
-            user: @component.settings.credential_issuer_api_user,
-            password: @component.settings.credential_issuer_api_pass
+            url: petition.component.settings.credential_issuer_api_url,
+            username: petition.component.settings.credential_issuer_api_user,
+            password: petition.component.settings.credential_issuer_api_pass
           }
         end
 
@@ -95,16 +92,16 @@ module Decidim
 
         def settings_petitions_api
           {
-            url: @component.settings.petitions_api_url,
-            user: @component.settings.petitions_api_user,
-            password: @component.settings.petitions_api_pass
+            url: petition.component.settings.petitions_api_url,
+            username: petition.component.settings.petitions_api_user,
+            password: petition.component.settings.petitions_api_pass
           }
         end
 
         def petition_value
           Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI.new(
             settings_credentials_issuer_api
-          ).extract_first_attribute_info(@petition.json_attribute_info)
+          ).extract_first_attribute_info(petition.json_attribute_info)
         end
       end
     end

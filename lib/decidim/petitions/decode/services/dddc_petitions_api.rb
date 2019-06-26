@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-#
+
 module Decidim
   module Petitions
     module Decode
@@ -9,39 +9,49 @@ module Decidim
 
           include RestApi
 
-          def initialize(login)
+          def initialize(url: "", username: "", password: "")
             # login needs to be a hash with url, username and password
             # login = { url: "http://example.com", username: "demo", password: "demo"}
-            @login = login
-            @bearer = get_bearer(
-              url: @login[:url],
-              username: @login[:username],
-              password: @login[:password]
-            )
+            @url = url
+            @username = username
+            @password = password
           end
 
           def create(petition_id: "", credential_issuer_url: "", credential_issuer_petition_value: "")
             # Creates the petition. Needs a valid Credential Issuer Authorizable Attribute.
             #
+            auth = authenticate(url: @url, username: @username, password: @password)
+            return auth unless auth[:status_code] == 200
+
             params = {
               petition_id: petition_id,
               credential_issuer_url: credential_issuer_url,
               credential_issuer_petition_value: credential_issuer_petition_value,
               authorizable_attribute_id: petition_id
             }
-            wrapper(http_method: :post, http_path: "#{@login[:url]}/petitions/", bearer: @bearer, params: params)
+
+            wrapper(
+              method: :post,
+              http_path: "#{@url}/petitions/",
+              bearer: auth[:response]["access_token"],
+              params: params
+            )
           end
 
           def tally(petition_id: "")
             # Tally the petition
             #
+            auth = authenticate(url: @url, username: @username, password: @password)
+            return auth unless auth[:status_code] == 200
+
             params = {
               authorizable_attribute_id: petition_id
             }
+
             wrapper(
-              http_method: :post,
-              http_path: "#{@login[:url]}/petitions/#{petition_id}/tally",
-              bearer: @bearer,
+              method: :post,
+              http_path: "#{@url}/petitions/#{petition_id}/tally",
+              bearer: auth[:response]["access_token"],
               params: params
             )
           end
@@ -50,9 +60,9 @@ module Decidim
             # Count the petition
             #
             wrapper(
-              http_method: :post,
-              http_path: "#{@login[:url]}/petitions/#{petition_id}/count",
-              bearer: @bearer
+              method: :post,
+              http_path: "#{@url}/petitions/#{petition_id}/count",
+              bearer: auth[:response]["access_token"]
             )
           end
 
@@ -60,8 +70,8 @@ module Decidim
             # Get the petition with extended information
             #
             wrapper(
-              http_method: :get,
-              http_path: "#{@login[:url]}/petitions/#{petition_id}?expand=true"
+              method: :get,
+              http_path: "#{@url}/petitions/#{petition_id}?expand=true"
             )
           end
         end
