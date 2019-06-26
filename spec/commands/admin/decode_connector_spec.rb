@@ -35,5 +35,15 @@ module Decidim::Petitions
         it { expect(subject.call).to broadcast(:invalid) }
       end
     end
+
+    describe "with petitions api" do
+      before do
+        stub_request(:any, /petitions/).to_rack(FakePetitionsApi)
+      end
+
+      let(:command) { "create_petition" }
+
+      it { expect(subject.call).to broadcast(:ok) }
+    end
   end
 end

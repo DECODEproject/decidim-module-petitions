@@ -38,8 +38,8 @@ module Decidim
           @connector.setup_barcelona_now
         end
 
-        def petitions
-          @connector.setup_dddc_petitions
+        def create_petition
+          connector.create_dddc_petition
         end
 
         def get
