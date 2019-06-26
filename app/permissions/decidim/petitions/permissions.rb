@@ -9,9 +9,7 @@ module Decidim
           return permission_action
         end
 
-        return Decidim::Consultations::Admin::Permissions.new(user, permission_action, context).permissions if permission_action.scope == :admin
-
-        permission_action
+        return Decidim::Petitions::Admin::Permissions.new(user, permission_action, context).permissions if permission_action.scope == :admin
       end
     end
   end

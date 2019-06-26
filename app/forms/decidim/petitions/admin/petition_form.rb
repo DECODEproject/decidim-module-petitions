@@ -12,8 +12,8 @@ module Decidim
         translatable_attribute :instructions_url, String
         attribute :image
         attribute :json_schema, SchemaAttribute, default: {}
-        attribute :json_attribute_info, SchemaAttribute, default: {}
-        attribute :json_attribute_info_optional, SchemaAttribute, default: {}
+        attribute :json_attribute_info, Array, default: []
+        attribute :json_attribute_info_optional, Array, default: []
         attribute :is_reissuable
 
         mimic :petition

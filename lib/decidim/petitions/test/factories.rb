@@ -16,7 +16,7 @@ FactoryBot.define do
     description { Decidim::Faker::Localized.wrapped("<p>", "</p>") { generate_localized_title } }
     author { build(:user, :confirmed, :admin, organization: component.organization) }
     component { build(:component, manifest_name: "petitions") }
-    instructions_url { ::Faker::Internet.url }
+    instructions_url { { en: ::Faker::Internet.url } }
     image { Decidim::Dev.test_file("city2.jpeg", "image/jpeg") }
     json_schema { Decidim::Petitions::Faker.json_schema }
     json_attribute_info { Decidim::Petitions::Faker.json_attribute_info }
