@@ -69,7 +69,8 @@ module Decidim
             logger "*" * 80
             logger "ATTR TO EXTRACT  => #{attribute_info} "
             attribute_info.map do |attribute|
-              Decidim::Petitions::Decode::Zenroom.hashing(attribute["value_set"][0])
+              attribute["value_set"] = Decidim::Petitions::Decode::Zenroom.hashing(attribute["value_set"][0])
+              attribute
             end
           end
         end
