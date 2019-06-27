@@ -24,15 +24,6 @@ module Decidim
         title["en"]
       end
 
-      def community_id
-        SecureRandom.hex(20)
-      end
-
-      def attribute_id
-        # (Decidim.config.application_name + "-" + title["en"]).downcase.tr(" ", "-")
-        "#{Decidim.config.application_name}-#{title["en"].parameterize}"
-      end
-
       def closed?
         state == "closed"
       end

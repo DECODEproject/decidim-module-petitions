@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "spec_helper"
+
 module Decidim
   module Petitions
     describe Petition do
@@ -18,16 +20,8 @@ module Decidim
         expect(subject.community_name).to eq(subject.title["en"])
       end
 
-      it "return community_id" do
-        expect(subject.community_id).not_to be nil
-      end
-
       it "return body en" do
         expect(subject.body).to eq(subject.title)
-      end
-
-      it "return attribute_id" do
-        expect(subject.attribute_id).to match(subject.title["en"].parameterize)
       end
 
       context "when petition is closed" do
