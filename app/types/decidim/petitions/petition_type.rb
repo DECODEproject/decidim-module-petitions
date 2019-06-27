@@ -17,6 +17,7 @@ module Decidim
 
       field :description, JSONType, "Description of the petition."
       field :json_schema, JSONType, "JSON Schema for DECODE"
+      field :json_attribute_info, JSONType, "JSON Attribute Info DECODE"
       field :json_attribute_info_optional, JSONType, "JSON Attribute Info Optional for DECODE"
 
       field :image, !types.String, "Petition image square" do
@@ -24,10 +25,10 @@ module Decidim
       end
       field :attribute_id, !types.String, "Attribute ID for Decode APIs"
       field :credential_issuer_api_url, !types.String, "Credential Issuer API URL for Decode APIs" do
-        resolve ->(_obj, _args, _ctx) { Rails.application.secrets.decode[:credential_issuer][:url] }
+        resolve ->(obj, _args, _ctx) { obj.component.settings.credential_issuer_api_url }
       end
       field :petitions_api_url, !types.String, "Petitions API URL for Decode APIs" do
-        resolve ->(_obj, _args, _ctx) { Rails.application.secrets.decode[:petitions][:url] }
+        resolve ->(obj, _args, _ctx) { obj.component.settings.petitions_api_url }
       end
     end
 
