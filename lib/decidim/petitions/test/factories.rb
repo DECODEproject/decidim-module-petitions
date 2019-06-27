@@ -12,8 +12,8 @@ FactoryBot.define do
 
   factory :petition, class: "Decidim::Petitions::Petition" do
     title { generate_localized_title }
-    summary { Decidim::Faker::Localized.wrapped("<p>", "</p>") { generate_localized_title } }
-    description { Decidim::Faker::Localized.wrapped("<p>", "</p>") { generate_localized_title } }
+    summary { Decidim::Faker::Localized.wrapped("<p>", "</p>") { Decidim::Faker::Localized.paragraph(3) } }
+    description { Decidim::Faker::Localized.wrapped("<p>", "</p>") { Decidim::Faker::Localized.paragraph(5) } }
     author { build(:user, :confirmed, :admin, organization: component.organization) }
     component { build(:component, manifest_name: "petitions") }
     instructions_url { { en: ::Faker::Internet.url } }

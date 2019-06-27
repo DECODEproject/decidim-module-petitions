@@ -35,7 +35,7 @@ module Decidim
         end
 
         def barcelona_now_dashboard
-          @connector.setup_barcelona_now
+          connector.setup_barcelona_now
         end
 
         def create_petition

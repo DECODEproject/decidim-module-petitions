@@ -11,6 +11,7 @@ Decidim::Dev.dummy_app_path =
 require "decidim/dev/test/base_spec_helper"
 require "support/fake_credential_issuer_api"
 require "support/fake_petitions_api"
+require "support/fake_dashboard_api"
 
 require "webmock/rspec"
 WebMock.disable_net_connect!(allow_localhost: true)
