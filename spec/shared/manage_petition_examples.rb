@@ -8,6 +8,8 @@ shared_examples "manage petitions" do
   let(:json_attribute_info_optional) { Decidim::Petitions::Faker.json_attribute_info_optional }
 
   describe "updating a petition" do
+    before { visit current_path }
+
     it "update a petition" do
       within find("tr", text: translated(petition.title)) do
         click_link "Edit"
@@ -24,7 +26,7 @@ shared_examples "manage petitions" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("The petition was updated successfully")
+      expect(page).to have_admin_callout("successfully")
 
       within "table" do
         expect(page).to have_content("My new title")
@@ -42,7 +44,7 @@ shared_examples "manage petitions" do
         accept_confirm { click_link "Destroy" }
       end
 
-      expect(page).to have_admin_callout("The petition was deleted successfully")
+      expect(page).to have_admin_callout("successfully")
 
       within "table" do
         expect(page).to have_no_content(translated(petition2.title))
@@ -60,7 +62,7 @@ shared_examples "manage petitions" do
         accept_confirm { click_link "Close petition" }
       end
 
-      expect(page).to have_admin_callout("The petition was closed successfully")
+      expect(page).to have_admin_callout("successfully")
 
       petition2.reload
       expect(petition2.opened?).to be false
@@ -73,7 +75,7 @@ shared_examples "manage petitions" do
         accept_confirm { click_link "Open petition" }
       end
 
-      expect(page).to have_admin_callout("The petition was opened successfully")
+      expect(page).to have_admin_callout("successfully")
 
       petition.reload
       expect(petition.opened?).to be true
@@ -99,6 +101,8 @@ shared_examples "manage petitions" do
   end
 
   describe "creating a petition" do
+    before { visit current_path }
+
     it "create a new petition", :slow do
       find(".card-title a.button").click
 
@@ -142,7 +146,7 @@ shared_examples "manage petitions" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("The petition was created successfully")
+      expect(page).to have_admin_callout("successfully")
     end
   end
 end
