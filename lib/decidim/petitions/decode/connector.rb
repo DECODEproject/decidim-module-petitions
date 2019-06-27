@@ -24,10 +24,10 @@ module Decidim
           Decidim::Petitions::Decode::Services::BarcelonaNow.new(
             settings_dashboard_api
           ).create(
-            credential_issuer_url: settings_credentials_issuer_api.url,
-            community_name: @petition.community_name,
-            community_id: @petition.community_id,
-            attribute_id: @petition.attribute_id
+            authorizable_attribute_id: petition.attribute_id,
+            community_id: petition.community_id,
+            community_name: petition.community_name,
+            credential_issuer_endpoint_address: petition.component.settings.credential_issuer_api_url
           )
         end
 
@@ -86,7 +86,7 @@ module Decidim
 
         def settings_dashboard_api
           {
-            url: @component.settings.barcelona_now_api_url
+            url: petition.component.settings.dashboard_api_url
           }
         end
 

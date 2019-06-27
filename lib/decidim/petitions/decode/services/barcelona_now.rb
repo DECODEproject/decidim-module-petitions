@@ -9,21 +9,25 @@ module Decidim
 
           include RestApi
 
-          def initialize(login)
+          def initialize(url: nil)
             # login needs to be a hash with url
             # login = { url: "http://example.com" }
-            @login = login
+            @url = url
           end
 
-          def create(credential_issuer_url: "", community_name: "", community_id: "", attribute_id: "")
+          def create(params)
             # Setup the Barcelona Now Dashboard API
             #
-            params = { community_name: community_name,
-                       community_id: community_id,
-                       authorizable_attribute_id: attribute_id,
-                       credential_issuer_endpoint_address: credential_issuer_url }
-            wrapper(http_method: :post, http_path: "#{@login[:url]}/community/create_encrypted", params: params)
+            wrapper(
+              method: :post,
+              http_path: "#{url}/community/create_encrypted",
+              params: params
+            )
           end
+
+          private
+
+          attr_reader :url
         end
       end
     end

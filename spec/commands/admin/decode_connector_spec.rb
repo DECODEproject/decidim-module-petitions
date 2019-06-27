@@ -45,5 +45,17 @@ module Decidim::Petitions
 
       it { expect(subject.call).to broadcast(:ok) }
     end
+
+    describe "with barcelona dashboard" do
+      before do
+        stub_request(:any, /dashboard/).to_rack(FakeDashboardApi)
+      end
+
+      let(:command) { "barcelona_now_dashboard" }
+
+      it "setup barcelona now" do
+        expect(subject.call).to broadcast(:ok)
+      end
+    end
   end
 end
