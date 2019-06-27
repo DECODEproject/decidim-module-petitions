@@ -30,6 +30,52 @@ shared_examples "manage petitions" do
     end
   end
 
+  describe "deleting a petition" do
+    let!(:petition2) { create(:petition, component: current_component) }
+
+    before { visit current_path }
+
+    it "destroy a petition" do
+      within find("tr", text: translated(petition2.title)) do
+        accept_confirm { click_link "Destroy" }
+      end
+
+      expect(page).to have_admin_callout("The petition was deleted successfully")
+
+      within "table" do
+        expect(page).to have_no_content(translated(petition2.title))
+      end
+    end
+  end
+
+  describe "deactivating a petition" do
+    let!(:petition2) { create(:petition, :open, component: current_component) }
+
+    before { visit current_path }
+
+    it "deactivate a petition" do
+      within find("tr", text: translated(petition2.title)) do
+        accept_confirm { click_link "Close petition" }
+      end
+
+      expect(page).to have_admin_callout("The petition was closed successfully")
+
+      petition2.reload
+      expect(petition2.opened?).to be false
+    end
+  end
+
+  it "activate a petition" do
+    within find("tr", text: translated(petition.title)) do
+      accept_confirm { click_link "Open petition" }
+    end
+
+    expect(page).to have_admin_callout("The petition was opened successfully")
+
+    petition.reload
+    expect(petition.opened?).to be true
+  end
+
   it "update invalid petition" do
     within find("tr", text: translated(petition.title)) do
       click_link "Edit"

@@ -93,7 +93,7 @@ en:
               petitions: The petition was successfully created on Petitions API
               tally: Tally successfully done
           destroy:
-            success: Petition deleted
+            success: The petition was deleted successfully
           edit:
             save: Save
             title: Edit Petition
