@@ -45,9 +45,9 @@ module Decidim
           )
         end
 
-        def tally_dddc_petitions
+        def tally_dddc_petition
           dddc_petitions.tally(
-            petition_id: @petition.attribute_id
+            petition_id: petition.id
           )
         end
 

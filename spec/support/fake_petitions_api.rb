@@ -12,7 +12,12 @@ class FakePetitionsApi < Sinatra::Base
   end
 
   get "/petitions/:petition_id" do
-    json_response 200, "create.json"
+    json_response 200, "petition.json"
+  end
+
+  # http_path: "#{@url}/petitions/#{petition_id}/tally",
+  post "/petitions/:petition_id/tally" do
+    json_response 200, "tally.json"
   end
 
   private

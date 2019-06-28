@@ -53,6 +53,12 @@ module Decidim::Petitions
         it { expect(subject.call).to broadcast(:ok) }
       end
 
+      context "with tally petition" do
+        let(:command) { "tally_petition" }
+
+        it { expect(subject.call).to broadcast(:ok) }
+      end
+
     end
 
     describe "with barcelona dashboard" do

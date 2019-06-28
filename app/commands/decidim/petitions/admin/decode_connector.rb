@@ -46,8 +46,8 @@ module Decidim
           connector.get_dddc_petition
         end
 
-        def tally
-          @connector.tally_dddc_petitions
+        def tally_petition
+          connector.tally_dddc_petition
         end
 
         def count
