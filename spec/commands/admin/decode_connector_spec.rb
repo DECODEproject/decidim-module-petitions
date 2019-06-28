@@ -59,6 +59,15 @@ module Decidim::Petitions
         it { expect(subject.call).to broadcast(:ok) }
       end
 
+      context "with count petition" do
+        let(:command) { "count_petition" }
+
+        it "update the vote count" do
+          expect(subject.call).to broadcast(:ok)
+          expect(petition.votes).to eq(125)
+        end
+      end
+
     end
 
     describe "with barcelona dashboard" do

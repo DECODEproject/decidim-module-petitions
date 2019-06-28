@@ -50,10 +50,12 @@ module Decidim
           connector.tally_dddc_petition
         end
 
-        def count
-          result = @connector.count_dddc_petitions
-          votes = JSON.parse(result[:response])["result"]
-          petition.update_attribute(:votes, votes)
+        def count_petition
+          result = connector.count_dddc_petition
+          if result[:status_code] == 200
+            votes = result[:response]["result"]
+            petition.update_attribute(:votes, votes)
+          end
           result
         end
 

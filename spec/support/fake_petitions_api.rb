@@ -20,6 +20,11 @@ class FakePetitionsApi < Sinatra::Base
     json_response 200, "tally.json"
   end
 
+  # http_path: "#{@url}/petitions/#{petition_id}/count",
+  post "/petitions/:petition_id/count" do
+    json_response 200, "count.json"
+  end
+
   private
 
   def json_response(response_code, file_name)

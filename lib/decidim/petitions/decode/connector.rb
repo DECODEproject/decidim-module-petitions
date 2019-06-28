@@ -51,9 +51,9 @@ module Decidim
           )
         end
 
-        def count_dddc_petitions
+        def count_dddc_petition
           dddc_petitions.count(
-            petition_id: @petition.attribute_id
+            petition_id: petition.id
           )
         end
 
