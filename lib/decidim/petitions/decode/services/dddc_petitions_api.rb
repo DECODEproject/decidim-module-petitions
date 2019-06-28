@@ -70,7 +70,7 @@ module Decidim
             )
           end
 
-          def get(petition_id: "")
+          def fetch(petition_id: "")
             # Get the petition with extended information
             #
             wrapper(

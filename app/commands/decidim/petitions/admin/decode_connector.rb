@@ -42,8 +42,8 @@ module Decidim
           connector.create_dddc_petition
         end
 
-        def get_petition
-          connector.get_dddc_petition
+        def fetch_petition
+          connector.fetch_dddc_petition
         end
 
         def tally_petition

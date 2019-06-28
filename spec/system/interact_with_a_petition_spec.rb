@@ -6,11 +6,11 @@ describe "User interact with petition", type: :system do
   include_context "with a component"
   let(:manifest_name) { "petitions" }
 
-  
   let!(:component) { create(:petitions_component, manifest: manifest, participatory_space: participatory_space) }
 
   context "when listing petitions" do
     let!(:petitions) { create_list(:petition, 5, component: component) }
+
     it "show paginate buttons" do
       visit_component
       expect(page).to have_css(".card--petition", count: 4)

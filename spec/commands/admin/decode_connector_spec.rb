@@ -47,8 +47,8 @@ module Decidim::Petitions
         it { expect(subject.call).to broadcast(:ok) }
       end
 
-      context "with get petition" do
-        let(:command) { "get_petition" }
+      context "with fetch petition" do
+        let(:command) { "fetch_petition" }
 
         it { expect(subject.call).to broadcast(:ok) }
       end
@@ -67,7 +67,6 @@ module Decidim::Petitions
           expect(petition.votes).to eq(125)
         end
       end
-
     end
 
     describe "with barcelona dashboard" do

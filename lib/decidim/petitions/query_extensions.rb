@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :nocov:
 module Decidim
   module Petitions
     module QueryExtensions
@@ -28,3 +29,4 @@ module Decidim
     end
   end
 end
+# :nocov:
