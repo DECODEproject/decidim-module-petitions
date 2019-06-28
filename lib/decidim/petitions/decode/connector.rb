@@ -31,9 +31,9 @@ module Decidim
           )
         end
 
-        def fetch_dddc_petitions
+        def get_dddc_petition
           dddc_petitions.get(
-            petition_id: @petition.attribute_id
+            petition_id: petition.id
           )
         end
 

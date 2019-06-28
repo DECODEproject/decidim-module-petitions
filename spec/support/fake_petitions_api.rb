@@ -11,6 +11,10 @@ class FakePetitionsApi < Sinatra::Base
     json_response 200, "create.json"
   end
 
+  get "/petitions/:petition_id" do
+    json_response 200, "create.json"
+  end
+
   private
 
   def json_response(response_code, file_name)

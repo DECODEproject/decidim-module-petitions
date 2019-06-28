@@ -41,9 +41,18 @@ module Decidim::Petitions
         stub_request(:any, /petitions/).to_rack(FakePetitionsApi)
       end
 
-      let(:command) { "create_petition" }
+      context "with create_petitions" do
+        let(:command) { "create_petition" }
 
-      it { expect(subject.call).to broadcast(:ok) }
+        it { expect(subject.call).to broadcast(:ok) }
+      end
+
+      context "with get petition" do
+        let(:command) { "get_petition" }
+
+        it { expect(subject.call).to broadcast(:ok) }
+      end
+
     end
 
     describe "with barcelona dashboard" do
