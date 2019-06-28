@@ -42,18 +42,20 @@ module Decidim
           connector.create_dddc_petition
         end
 
-        def get
-          @connector.fetch_dddc_petitions
+        def fetch_petition
+          connector.fetch_dddc_petition
         end
 
-        def tally
-          @connector.tally_dddc_petitions
+        def tally_petition
+          connector.tally_dddc_petition
         end
 
-        def count
-          result = @connector.count_dddc_petitions
-          votes = JSON.parse(result[:response])["result"]
-          petition.update_attribute(:votes, votes)
+        def count_petition
+          result = connector.count_dddc_petition
+          if result[:status_code] == 200
+            votes = result[:response]["result"]
+            petition.update_attribute(:votes, votes)
+          end
           result
         end
 

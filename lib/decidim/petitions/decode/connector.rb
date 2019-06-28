@@ -31,9 +31,9 @@ module Decidim
           )
         end
 
-        def fetch_dddc_petitions
-          dddc_petitions.get(
-            petition_id: @petition.attribute_id
+        def fetch_dddc_petition
+          dddc_petitions.fetch(
+            petition_id: petition.id
           )
         end
 
@@ -45,15 +45,15 @@ module Decidim
           )
         end
 
-        def tally_dddc_petitions
+        def tally_dddc_petition
           dddc_petitions.tally(
-            petition_id: @petition.attribute_id
+            petition_id: petition.id
           )
         end
 
-        def count_dddc_petitions
+        def count_dddc_petition
           dddc_petitions.count(
-            petition_id: @petition.attribute_id
+            petition_id: petition.id
           )
         end
 

@@ -59,6 +59,10 @@ module Decidim
           def count(petition_id: "")
             # Count the petition
             #
+
+            auth = authenticate(url: @url, username: @username, password: @password)
+            return auth unless auth[:status_code] == 200
+
             wrapper(
               method: :post,
               http_path: "#{@url}/petitions/#{petition_id}/count",
