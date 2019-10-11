@@ -29,19 +29,19 @@ module Decidim
       private
 
       def support_url(petition)
-        "logIn?&serviceId=#{petition.id}&callback=#{callback}&credentialIssuerEndpointAddress=#{credential_issuer}"
+        "logIn?&serviceId=#{petition.id}&callback=#{callback(petition)}&credentialIssuerEndpointAddress=#{credential_issuer(petition)}"
       end
 
       def decode_url(petition)
         "decodeapp://#{support_url(petition)}"
       end
 
-      def credential_issuer
-        current_component.settings.credential_issuer_api_url
+      def credential_issuer(petition)
+        petition.component.settings.credential_issuer_api_url
       end
 
-      def callback
-        current_component.settings.dashboard_api_url
+      def callback(petition)
+        petition.component.settings.dashboard_api_url
       end
     end
   end
