@@ -13,11 +13,19 @@ module Decidim
         # username: Username to authenticate
         # password: Password to authenticate
         def authenticate(url: "", username: "", password: "")
-          wrapper(
-            method: :post,
-            http_path: "#{url}/token",
-            params: { grant_type: "", username: username, password: password }
-          )
+          begin
+            response = RestClient::Request.execute(
+              method: :post,
+              url: "#{url}/token",
+              payload: "username=#{username}&password=#{password}"
+            )
+            body = JSON.parse(response.body)
+            status_code = response.code
+          rescue RestClient::ExceptionWithResponse => err
+            body = err.message
+            status_code = err.http_code
+          end
+          { response: body, status_code: status_code }
         end
 
         # Call a given method on a path for some params with a bearer
@@ -39,17 +47,12 @@ module Decidim
 
         def response(method: :post, url: "", params: {}, bearer: nil)
           headers = {
-            params: params,
             content_type: :json,
             accept: :json
           }
           headers = headers.merge(authorization: "Bearer #{bearer}") if bearer
 
-          RestClient::Request.execute(
-            method: method,
-            url: url,
-            headers: headers
-          )
+          RestClient.post(url, params.to_json, headers)
         end
       end
     end
