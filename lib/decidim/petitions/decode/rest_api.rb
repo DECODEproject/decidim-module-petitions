@@ -52,7 +52,11 @@ module Decidim
           }
           headers = headers.merge(authorization: "Bearer #{bearer}") if bearer
 
-          RestClient.post(url, params.to_json, headers)
+          RestClient::Request.execute(
+            method: method,
+            url: url,
+            payload: params.to_json,
+            headers: headers)
         end
       end
     end
