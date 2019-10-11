@@ -25,8 +25,8 @@ en:
         activate: Open petition
         close:
           assert_count: Assert count with Zenroom
-          count: Count with Petitions API
-          tally: Tally with Petitions API
+          count_petition: Count with Petitions API
+          tally_petition: Tally with Petitions API
         confirm_close: Are you sure to close this petition?
         confirm_destroy: Are you sure to destroy this petition?
         confirm_open: |
@@ -43,7 +43,7 @@ en:
         open:
           barcelona_now_dashboard: Open DECODE Barcelona Now Dashboard API
           credential_issuer: Open DECODE Credential Issuer API
-          petitions: Open DECODE Petitions API
+          create_petition: Open DECODE Petitions API
         title: Actions
       admin:
         model:
@@ -71,6 +71,11 @@ en:
           deactivate:
             success: The petition was closed successfully
           decode:
+            invalid:
+              400: "The request to petitions API is malformed, please check the petitions API documentation"
+              401: "Not authorized to make use of petitions API"
+              404: "Petition not found on external petitions API"
+              409: "Petition already open or conflict on the petition ID, if is a new petition please recreate the petition"
             duplicated:
               barcelona_now_dashboard: Seems like there's already a petition with
                 that data on Barcelona Now Dashboard. Check logs.
