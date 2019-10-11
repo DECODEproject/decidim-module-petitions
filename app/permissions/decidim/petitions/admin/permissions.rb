@@ -8,6 +8,8 @@ module Decidim
           return permission_action unless user
           return permission_action unless permission_action.scope == :admin
 
+          return permission_action if petition && !petition.is_a?(Decidim::Petitions::Petition)
+
           unless user.admin?
             disallow!
             return permission_action
@@ -15,6 +17,11 @@ module Decidim
 
           allow!
           permission_action
+        end
+
+        private
+        def petition
+          @petition ||= context.fetch(:petition, nil)
         end
       end
     end
