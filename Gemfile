@@ -9,6 +9,7 @@ gem "decidim-petitions", path: "."
 
 gem "puma", "~> 3.0"
 gem "uglifier", "~> 4.1"
+
 gem "sprockets", "~> 3.7.2"
 
 group :development, :test do
