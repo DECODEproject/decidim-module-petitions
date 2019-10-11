@@ -20,6 +20,7 @@ module Decidim
         end
 
         private
+
         def petition
           @petition ||= context.fetch(:petition, nil)
         end

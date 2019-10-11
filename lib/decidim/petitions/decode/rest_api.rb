@@ -56,7 +56,8 @@ module Decidim
             method: method,
             url: url,
             payload: params.to_json,
-            headers: headers)
+            headers: headers
+          )
         end
       end
     end
