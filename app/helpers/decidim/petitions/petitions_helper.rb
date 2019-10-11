@@ -13,10 +13,6 @@ module Decidim
         link_to t("open_wallet", scope: "decidim.petitions.petitions.petition"), decode_url(petition), class: "button expanded button--sc"
       end
 
-      def expo_button(petition)
-        link_to t("open_expo", scope: "decidim.petitions.petitions.petition"), expo_url(petition), class: "button expanded button--sc"
-      end
-
       def petition_qrcode(petition)
         "data:image/png;base64," + Base64.strict_encode64(RQRCode::QRCode.new(decode_url(petition)).as_png(
           resize_gte_to: false,
@@ -32,16 +28,20 @@ module Decidim
 
       private
 
-      def exp_url(petition)
-        "//exp.host/@decode-barcelona/decode-walletapp?release-channel=production&mobile=true&decidimAPIUrl=#{decidim_api.root_url}&petitionId=#{petition.id}"
+      def support_url(petition)
+        "logIn?&serviceId=#{petition.id}&callback=#{callback}&credentialIssuerEndpointAddress=#{credential_issuer}"
       end
 
       def decode_url(petition)
-        "decodeapp:#{exp_url(petition)}"
+        "decodeapp://#{support_url(petition)}"
       end
 
-      def expo_url(petition)
-        "exp:#{exp_url(petition)}"
+      def credential_issuer
+        current_component.settings.credential_issuer_api_url
+      end
+
+      def callback
+        current_component.settings.dashboard_api_url
       end
     end
   end
