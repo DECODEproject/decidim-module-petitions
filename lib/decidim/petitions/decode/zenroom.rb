@@ -31,7 +31,7 @@ module Decidim
           # from DECODE's dddc-pilot-contracts.
           #
           # It shouldn't be the same tally / petition for all the petitions
-          contract = "#{CONTRACTS_DIR}/14-CITIZEN-count-petition.zencode"
+          contract = "#{CONTRACTS_DIR}/tally_petition.zen"
           tally_file_path = write_to_tmp_file("tally.json", JSON.unparse(json_tally))
           petition_file_path = write_to_tmp_file("petition.json", JSON.unparse(json_petition))
           logger("*" * 80)

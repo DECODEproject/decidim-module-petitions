@@ -4,7 +4,7 @@ module Decidim
   # This holds the decidim-meetings version.
   module Petitions
     def self.version
-      "0.17.1"
+      "0.18.0"
     end
   end
 end

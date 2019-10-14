@@ -17,11 +17,5 @@ module Decidim::Petitions
         expect(helper.decodewallet_button(petition)).to have_css(".button--sc")
       end
     end
-
-    describe "expo_button" do
-      it "generate link to expo" do
-        expect(helper.expo_button(petition)).to have_css(".button--sc")
-      end
-    end
   end
 end

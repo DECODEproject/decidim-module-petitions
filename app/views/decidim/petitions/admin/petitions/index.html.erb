@@ -55,7 +55,7 @@
                   <% decode_options = [
                     {icon: "key", command: "credential_issuer", name: "Credential Issuer"},
                     {icon: "dashboard", command: "barcelona_now_dashboard", name: "Barcelona Now Dashboard"},
-                    {icon: "script", command: "petitions", name: "Petitions"}
+                    {icon: "script", command: "create_petition", name: "Petitions"}
                   ] %>
                   <% decode_options.each do |option| %>
                     <%= icon_link_to option[:icon],
@@ -67,8 +67,8 @@
                   <% end %>
                 <% else %>
                   <% decode_options = [
-                    {icon: "timer", command: "tally", name: "Tally Petitions"},
-                    {icon: "cloud", command: "count", name: "Count Petitions"},
+                    {icon: "timer", command: "tally_petition", name: "Tally Petitions"},
+                    {icon: "cloud", command: "count_petition", name: "Count Petitions"},
                     {icon: "cloudy", command: "assert_count", name: "Assert Count with Zenroom"}
                   ] %>
                   <% decode_options.each do |option| %>
