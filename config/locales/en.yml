@@ -72,11 +72,12 @@ en:
             success: The petition was closed successfully
           decode:
             invalid:
-              400: "The request to petitions API is malformed, please check the petitions API documentation"
-              401: "Not authorized to make use of petitions API"
-              404: "Petition not found on external petitions API"
-              409: "Petition already open or conflict on the petition ID, if is a new petition please recreate the petition"
-              422: "Can't process the petition, please check the petition's configuration"
+              400: The request to petitions API is malformed, please check the petitions API documentation
+              401: Not authorized to make use of petitions API
+              404: Petition not found on external petitions API
+              409: Petition already open or conflict on the petition ID, if is a new petition please recreate the petition
+              422: Can't process the petition, please check the petition's configuration
+              debug: "Response: %{response}"
             duplicated:
               barcelona_now_dashboard: Seems like there's already a petition with
                 that data on Barcelona Now Dashboard. Check logs.
