@@ -26,8 +26,8 @@ module Decidim
 
       def attribute_uuid
         # A method to make tests editing the title
-        # It's unique to this Decidim installation 
-        (Decidim.config.application_name + "-" + title["en"]).downcase.gsub(' ', '-')
+        # It's unique to this Decidim installation
+        (Decidim.config.application_name + "-" + title["en"]).downcase.tr(" ", "-")
       end
 
       def closed?
