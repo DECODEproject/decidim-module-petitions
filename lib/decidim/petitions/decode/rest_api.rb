@@ -19,12 +19,18 @@ module Decidim
               url: "#{url}/token",
               payload: "username=#{username}&password=#{password}"
             )
+            logger_req(
+              url: url,
+              method: :post,
+              payload: "username=#{username}&password=#{password}"
+            )
             body = JSON.parse(response.body)
             status_code = response.code
           rescue RestClient::ExceptionWithResponse => err
             body = err.message
             status_code = err.http_code
           end
+          logger_resp("API Call", response: body, status: status_code)
           { response: body, status_code: status_code }
         end
 
@@ -39,8 +45,14 @@ module Decidim
             body = err.message
             status_code = err.http_code
           end
+          logger_resp("API Call", response: body, status: status_code)
+          request = {
+            url: http_path,
+            method: method,
+            params: params
+          }
 
-          { response: body, status_code: status_code, bearer: bearer }
+          { response: body, status_code: status_code, bearer: bearer, request: request }
         end
 
         private
@@ -51,6 +63,13 @@ module Decidim
             accept: :json
           }
           headers = headers.merge(authorization: "Bearer #{bearer}") if bearer
+          request = {
+            url: url,
+            method: :post,
+            payload: params.to_json,
+            headers: headers
+          }
+          logger_req(request)
 
           RestClient::Request.execute(
             method: method,

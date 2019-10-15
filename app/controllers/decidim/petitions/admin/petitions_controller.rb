@@ -65,18 +65,14 @@ module Decidim
           #
           enforce_permission_to :update, :petition, petition: petition
           DecodeConnector.call(petition, params[:command]) do
-            on(:ok) do
+            on(:ok) do |result|
               flash[:notice] = I18n.t("petitions.decode.success.#{params[:command]}", scope: "decidim.petitions.admin")
-              redirect_to petitions_path
+              update_log(result)
             end
             on(:invalid) do |result|
               flash[:error] = I18n.t("petitions.decode.invalid.#{result[:status_code]}",
                                      scope: "decidim.petitions.admin")
-              flash[:debug] = I18n.t("petitions.decode.invalid.debug",
-                                     response: result[:response],
-                                     status_code: result[:status_code],
-                                     scope: "decidim.petitions.admin")
-              redirect_to petitions_path
+              update_log(result)
             end
           end
         end
@@ -85,6 +81,36 @@ module Decidim
 
         def petition
           @petition ||= Petition.find_by(component: current_component, id: params[:id])
+        end
+
+        def update_log(result)
+          petition_log = <<~LOG_TEXT
+            AUTHENTICATION
+            ================================
+            #{result[:bearer]}
+            ================================
+            URL
+            ================================
+            #{result[:request][:url]}
+            ================================
+            METHOD
+            ================================
+            #{result[:request][:method]}
+            ================================
+            PARAMS
+            ================================
+            #{JSON.pretty_generate(result[:request][:params])}
+            ================================
+            STATUS CODE
+            ================================
+            #{result[:status_code]}
+            ================================
+            RESPONSE
+            ================================
+            #{result[:response]}
+            ================================
+          LOG_TEXT
+          petition.update log: petition_log.strip
         end
       end
     end
