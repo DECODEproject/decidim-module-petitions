@@ -85,6 +85,13 @@ module Decidim
 
         def update_log(result)
           petition_log = <<~LOG_TEXT
+            CURL
+            ================================
+            curl -X #{result[:request][:method].upcase} "#{result[:request][:url]}" -H  "accept: application/json" \\
+            -H  "Authorization: Bearer #{result[:bearer]}" \\
+            -H  "Content-Type: application/json" \\
+            -d #{result[:request][:params].to_json.inspect}
+            ===============================
             AUTHENTICATION
             ================================
             #{result[:bearer]}

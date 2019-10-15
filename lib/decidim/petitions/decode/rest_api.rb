@@ -42,7 +42,7 @@ module Decidim
             body = JSON.parse(response.body)
             status_code = response.code
           rescue RestClient::ExceptionWithResponse => err
-            body = err.message
+            body = err.http_body
             status_code = err.http_code
           end
           logger_resp("API Call", response: body, status: status_code)
