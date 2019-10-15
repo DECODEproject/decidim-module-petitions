@@ -24,6 +24,12 @@ module Decidim
         title["en"]
       end
 
+      def attribute_uuid
+        # A method to make tests editing the title
+        # It's unique to this Decidim installation 
+        (Decidim.config.application_name + "-" + title["en"]).downcase.gsub(' ', '-')
+      end
+
       def closed?
         state == "closed"
       end
