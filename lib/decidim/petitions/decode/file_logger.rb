@@ -20,15 +20,24 @@ module Decidim
           end
         end
 
-        def logger_resp(message, resp)
+        def logger_resp(message, response: nil, status: nil)
           # Log rest-client responses
           #
           logger("-" * 80)
           logger(message + " - response")
-          logger "STATUS CODE => #{resp.code}"
-          logger "BODY        => #{resp.body}"
-          logger "HEADERS     => #{resp.headers}"
+          logger "STATUS CODE => #{status}"
+          logger "BODY        => #{response}"
           logger("*" * 80)
+        end
+
+        def logger_req(url: nil, method: :post, payload: nil, headers: nil)
+          logger("-" * 80)
+          logger("API Request")
+          logger("URL: #{url}")
+          logger("Method: #{method}")
+          logger("Headers: #{headers}")
+          logger("Payload: #{payload}")
+          logger("-" * 80)
         end
       end
     end

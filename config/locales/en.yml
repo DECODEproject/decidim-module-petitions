@@ -23,6 +23,7 @@ en:
     petitions:
       actions:
         activate: Open petition
+        back: Return to petitions list
         close:
           assert_count: Assert count with Zenroom
           count_petition: Count with Petitions API
