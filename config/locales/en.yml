@@ -78,6 +78,7 @@ en:
               404: Petition not found on external petitions API
               409: Petition already open or conflict on the petition ID, if is a new petition please recreate the petition
               422: Can't process the petition, please check the petition's configuration
+              500: API Endpoint has a internal server error
               debug: "Response: %{response}"
             duplicated:
               barcelona_now_dashboard: Seems like there's already a petition with
