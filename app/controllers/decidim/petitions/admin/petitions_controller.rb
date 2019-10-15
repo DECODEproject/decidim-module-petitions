@@ -70,7 +70,12 @@ module Decidim
               redirect_to petitions_path
             end
             on(:invalid) do |result|
-              flash[:error] = I18n.t("petitions.decode.invalid.#{result[:status_code]}", scope: "decidim.petitions.admin")
+              flash[:error] = I18n.t("petitions.decode.invalid.#{result[:status_code]}",
+                                     scope: "decidim.petitions.admin")
+              flash[:debug] = I18n.t("petitions.decode.invalid.debug",
+                                     response: result[:response],
+                                     status_code: result[:status_code],
+                                     scope: "decidim.petitions.admin")
               redirect_to petitions_path
             end
           end

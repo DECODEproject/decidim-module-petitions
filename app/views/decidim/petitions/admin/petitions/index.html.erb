@@ -5,31 +5,32 @@
       <%= link_to t("actions.new", scope: "decidim.petitions"), new_petition_path, class: "button tiny button--title" %>
     </h2>
   </div>
-    <div class="card-section">
-      <p>To use this module you need to have at least running Credentials Issuer API and Petition API from DECODE project.</p>
-      <p>Then you need to configure the petition with the associated data for the Mobile App. </p>
-      <p>Finally you need to execute these actions on this order:</p>
-      <ol>
-        <li><%= icon "lock-unlocked" %> Activate: internally mark the petition as "open" on DDDC. </li>
-        <li><%= icon "key" %> Create Credential Isssuer: externally sends to Credential Issuer API the census data and optional attributes to be aggregated for statistical purpose. </li>
-        <li><%= icon "dashboard" %> Create Dashboard API: externally sends to Barcelona Now Dashboard API the census title. </li>
-        <li><%= icon "script" %> Create Petitions API: externally sends to Petitions API. </li>
-      </ol>
-      <p>From this moment you can sign with the Mobile App. </p>
-      <p>You can check that everything is working with:<p>
-        <ol>
-          <li><%= icon "code" %> Get: externally sends to Petitions API the get command to get information. <b>Don't change anything (title, description, census data, etc) on the petition</b>.<p></li>
+  <div class="card-section">
+    <p>To use this module you need to have at least running Credentials Issuer API and Petition API from DECODE project.</p>
+    <p>Then you need to configure the petition with the associated data for the Mobile App. </p>
+    <p>Finally you need to execute these actions on this order:</p>
+    <ol>
+      <li><%= icon "lock-unlocked" %> Activate: internally mark the petition as "open" on DDDC. </li>
+      <li><%= icon "key" %> Create Credential Isssuer: externally sends to Credential Issuer API the census data and optional attributes to be aggregated for statistical purpose. </li>
+      <li><%= icon "dashboard" %> Create Dashboard API: externally sends to Barcelona Now Dashboard API the census title. </li>
+      <li><%= icon "script" %> Create Petitions API: externally sends to Petitions API. </li>
     </ol>
-      <p>For closing the petition:</p>
-      <ol>
-        <li><%= icon "lock-locked" %> Deactivate: internally mark the petition as "closed" on DDDC </li>
-        <li><%= icon "timer" %> Tally: externally sends to Petitions API the tally command to close. </li>
-        <li><%= icon "cloud" %> Count: externally sends to Petitions API the count command. </li>
-        <li><%= icon "cloudy" %> Recount: checks with Zenroom the count data. </li>
-      </ol>
-      <p>If any of these gives you an error you need to check your server logs to debug.</p>
-    </div>
+    <p>From this moment you can sign with the Mobile App. </p>
+    <p>You can check that everything is working with:<p>
+    <ol>
+      <li><%= icon "code" %> Get: externally sends to Petitions API the get command to get information. <b>Don't change anything (title, description, census data, etc) on the petition</b>.<p></li>
+    </ol>
+    <p>For closing the petition:</p>
+    <ol>
+      <li><%= icon "lock-locked" %> Deactivate: internally mark the petition as "closed" on DDDC </li>
+      <li><%= icon "timer" %> Tally: externally sends to Petitions API the tally command to close. </li>
+      <li><%= icon "cloud" %> Count: externally sends to Petitions API the count command. </li>
+      <li><%= icon "cloudy" %> Recount: checks with Zenroom the count data. </li>
+    </ol>
+    <p>If any of these gives you an error you need to check your server logs to debug.</p>
   </div>
+</div>
+<div class="card">
   <div class="card-section">
     <div class="table-scroll">
       <table class="table-list">
