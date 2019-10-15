@@ -85,31 +85,30 @@ module Decidim
 
         def update_log(result)
           petition_log = <<~LOG_TEXT
-
-          AUTHENTICATION
-          ================================
-          #{result[:bearer]}
-          ================================
-          URL
-          ================================
-          #{result[:request][:url]}
-          ================================
-          METHOD
-          ================================
-          #{result[:request][:method]}
-          ================================
-          PARAMS
-          ================================
-          #{JSON.pretty_generate(result[:request][:params])}
-          ================================
-          STATUS CODE
-          ================================
-          #{result[:status_code]}
-          ================================
-          RESPONSE
-          ================================
-          #{result[:response]}
-          ================================
+            AUTHENTICATION
+            ================================
+            #{result[:bearer]}
+            ================================
+            URL
+            ================================
+            #{result[:request][:url]}
+            ================================
+            METHOD
+            ================================
+            #{result[:request][:method]}
+            ================================
+            PARAMS
+            ================================
+            #{JSON.pretty_generate(result[:request][:params])}
+            ================================
+            STATUS CODE
+            ================================
+            #{result[:status_code]}
+            ================================
+            RESPONSE
+            ================================
+            #{result[:response]}
+            ================================
           LOG_TEXT
           petition.update log: petition_log.strip
         end

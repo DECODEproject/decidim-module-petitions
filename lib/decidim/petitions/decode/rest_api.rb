@@ -71,7 +71,7 @@ module Decidim
           }
           logger_req(request)
 
-           RestClient::Request.execute(
+          RestClient::Request.execute(
             method: method,
             url: url,
             payload: params.to_json,
