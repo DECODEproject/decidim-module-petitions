@@ -27,7 +27,7 @@ module Decidim
       def attribute_uuid
         # A method to make tests editing the title
         # It's unique to this Decidim installation
-        (Decidim.config.application_name + "-" + title["en"]).downcase.tr(" ", "-")
+        (Decidim.config.application_name + "-" + title["en"]).parameterize
       end
 
       def closed?
