@@ -24,7 +24,7 @@ module Decidim
         title["en"]
       end
 
-      def attribute_uuid
+      def attribute_id
         # A method to make tests editing the title
         # It's unique to this Decidim installation
         (Decidim.config.application_name + "-" + title["en"]).parameterize
