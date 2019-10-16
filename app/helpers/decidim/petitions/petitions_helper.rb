@@ -30,10 +30,10 @@ module Decidim
 
       def support_url(petition)
         "support?mobile=true"\
-	"&decidimAPIUrl=#{decidim_api.root_url}"\
-	"&serviceId=#{petition.id}"\
-	"&credentialIssuerEndpointAddress=#{credential_issuer(petition)}"\
-	"&authorizableAttributeId=#{petition.id}"
+        "&decidimAPIUrl=#{decidim_api.root_url}"\
+        "&serviceId=#{petition.id}"\
+        "&credentialIssuerEndpointAddress=#{credential_issuer(petition)}"\
+        "&authorizableAttributeId=#{petition.id}"
       end
 
       def decode_url(petition)
