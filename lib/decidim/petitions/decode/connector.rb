@@ -12,7 +12,7 @@ module Decidim
           Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI.new(
             settings_credentials_issuer_api
           ).create(
-            attribute_id: petition.attribute_uuid,
+            attribute_id: petition.attribute_id,
             attribute_info: petition.json_attribute_info,
             attribute_info_optional: petition.json_attribute_info_optional,
             hash_attributes: true,
@@ -24,8 +24,8 @@ module Decidim
           Decidim::Petitions::Decode::Services::BarcelonaNow.new(
             settings_dashboard_api
           ).create(
-            authorizable_attribute_id: petition.attribute_uuid,
-            community_id: petition.attribute_uuid,
+            authorizable_attribute_id: petition.attribute_id,
+            community_id: petition.attribute_id,
             community_name: petition.community_name,
             credential_issuer_endpoint_address: petition.component.settings.credential_issuer_api_url
           )
@@ -33,13 +33,13 @@ module Decidim
 
         def fetch_dddc_petition
           dddc_petitions.fetch(
-            petition_id: petition.attribute_uuid
+            petition_id: petition.attribute_id
           )
         end
 
         def create_dddc_petition
           dddc_petitions.create(
-            petition_id: petition.attribute_uuid,
+            petition_id: petition.attribute_id,
             credential_issuer_url: petition.component.settings.credential_issuer_api_url,
             credential_issuer_petition_value: petition_value
           )
@@ -47,13 +47,13 @@ module Decidim
 
         def tally_dddc_petition
           dddc_petitions.tally(
-            petition_id: petition.attribute_uuid
+            petition_id: petition.attribute_id
           )
         end
 
         def count_dddc_petition
           dddc_petitions.count(
-            petition_id: petition.attribute_uuid
+            petition_id: petition.attribute_id
           )
         end
 
