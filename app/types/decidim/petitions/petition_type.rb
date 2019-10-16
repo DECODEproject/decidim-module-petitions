@@ -21,7 +21,7 @@ module Decidim
       field :json_attribute_info_optional, JSONType, "JSON Attribute Info Optional for DECODE"
 
       field :image, !types.String, "Petition image square" do
-        resolve ->(obj, _args, _ctx) { obj.image.url(:square) }
+        resolve ->(obj, _args, _ctx) { obj.image.url(:square) if obj.image }
       end
       field :attribute_id, !types.String, "Attribute ID for Decode APIs"
       field :credential_issuer_api_url, !types.String, "Credential Issuer API URL for Decode APIs" do
