@@ -12,8 +12,8 @@ module Decidim::Petitions
     describe "id" do
       let(:query) { "{ id }" }
 
-      it "returns the petition uuid" do
-        expect(response).to include("id" => model.id)
+      it "returns the petition id" do
+        expect(response).to include("id" => model.id.to_s)
       end
     end
 
