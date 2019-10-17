@@ -10,8 +10,10 @@ module Decidim
 
       mount_uploader :image, Decidim::Petitions::ImageUploader
 
-      validates :title, :description, :summary, :image, presence: true
+      validates :title, :description, :summary, presence: true
       validate :author_belong_to_organization
+
+      validates :image, presence: true, on: :create
 
       scope :closed, -> { where(state: "closed") }
       scope :opened, -> { where(state: "opened") }
