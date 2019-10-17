@@ -19,7 +19,7 @@ module Decidim
         mimic :petition
 
         validates :title, :summary, :description, translatable_presence: true
-        validates :json_schema, :json_attribute_info, :json_attribute_info_optional, presence: true
+        validates :json_schema, :json_attribute_info, :json_attribute_info_optional, :image, presence: true
         validates :image, file_size: {
           less_than_or_equal_to: ->(_record) { Decidim.maximum_attachment_size }
         }, file_content_type: { allow: ["image/jpeg", "image/png"] }
