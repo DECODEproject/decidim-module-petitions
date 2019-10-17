@@ -67,12 +67,12 @@ module Decidim
           DecodeConnector.call(petition, params[:command]) do
             on(:ok) do |result|
               flash[:notice] = I18n.t("petitions.decode.success.#{params[:command]}", scope: "decidim.petitions.admin")
-              update_log(result, { params[:command].to_sym => true })
+              update_log(result, params[:command].to_sym => true)
             end
             on(:invalid) do |result|
               flash[:error] = I18n.t("petitions.decode.invalid.#{result[:status_code]}",
                                      scope: "decidim.petitions.admin")
-              update_log(result, { params[:command].to_sym => false })
+              update_log(result, params[:command].to_sym => false)
             end
           end
         end
