@@ -67,12 +67,12 @@ module Decidim
           DecodeConnector.call(petition, params[:command]) do
             on(:ok) do |result|
               flash[:notice] = I18n.t("petitions.decode.success.#{params[:command]}", scope: "decidim.petitions.admin")
-              update_log(result)
+              update_log(result, params[:command].to_sym => true)
             end
             on(:invalid) do |result|
               flash[:error] = I18n.t("petitions.decode.invalid.#{result[:status_code]}",
                                      scope: "decidim.petitions.admin")
-              update_log(result)
+              update_log(result, params[:command].to_sym => false)
             end
           end
         end
@@ -83,7 +83,7 @@ module Decidim
           @petition ||= Petition.find_by(component: current_component, id: params[:id])
         end
 
-        def update_log(result)
+        def update_log(result, status)
           petition_log = <<~LOG_TEXT
             CURL
             ================================
@@ -117,7 +117,8 @@ module Decidim
             #{result[:response]}
             ================================
           LOG_TEXT
-          petition.update log: petition_log.strip
+          decode_status = petition.status.merge(status)
+          petition.update(log: petition_log.strip, status: decode_status)
         end
       end
     end
