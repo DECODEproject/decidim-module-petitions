@@ -6,7 +6,7 @@ Decidim.register_component(:petitions) do |component|
   component.engine = Decidim::Petitions::Engine
   component.admin_engine = Decidim::Petitions::AdminEngine
   component.icon = "decidim/petitions/icon.svg"
-  component.admin_stylesheet = "decidim/admin/petitions/petitions.css"
+  component.admin_stylesheet = "petitions/petitions.css"
 
   component.permissions_class_name = "Decidim::Petitions::Permissions"
 
