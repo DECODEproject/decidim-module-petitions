@@ -15,7 +15,6 @@ module Decidim
             attribute_id: petition.attribute_id,
             attribute_info: petition.json_attribute_info,
             attribute_info_optional: petition.json_attribute_info_optional,
-            hash_attributes: true,
             reissuable: petition.is_reissuable
           )
         end
@@ -101,7 +100,7 @@ module Decidim
         def petition_value
           Decidim::Petitions::Decode::Services::DDDCCredentialIssuerAPI.new(
             settings_credentials_issuer_api
-          ).extract_first_attribute_info(petition.json_attribute_info)
+          ).extract_first_attribute_info(petition.json_attribute_info).map { |k| { name: k["name"], value: k["value_set"] } }
         end
       end
     end

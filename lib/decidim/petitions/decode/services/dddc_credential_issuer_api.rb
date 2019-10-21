@@ -17,8 +17,7 @@ module Decidim
             @password = password
           end
 
-          def create(hash_attributes: false,
-                     reissuable: false,
+          def create(reissuable: false,
                      attribute_id: "",
                      attribute_info: "",
                      attribute_info_optional: "")
@@ -29,11 +28,9 @@ module Decidim
             auth = authenticate(url: @url, username: @username, password: @password)
             return auth unless auth[:status_code] == 200
 
-            attribute_info = hash_attributes ? hash_attribute_info(attribute_info) : attribute_info
-            attribute_info_optional = hash_attributes ? hash_attribute_info(attribute_info_optional) : attribute_info_optional
             params = { authorizable_attribute_id: attribute_id,
-                       authorizable_attribute_info: attribute_info,
-                       authorizable_attribute_info_optional: attribute_info_optional,
+                       authorizable_attribute_info: hash_attribute_info(attribute_info),
+                       authorizable_attribute_info_optional: hash_attribute_info(attribute_info_optional),
                        reissuable: reissuable }
             wrapper(
               method: :post,
@@ -50,8 +47,8 @@ module Decidim
             logger "*" * 80
             logger "ATTR TO HASH => #{attribute_info} "
             output = attribute_info.map do |attribute|
-              attribute["value_set"] = attribute["value_set"].map do |x|
-                Decidim::Petitions::Decode::Zenroom.hashing(x)
+              attribute["value_set"] = attribute["value_set"].map do |value|
+                Decidim::Petitions::Decode::Zenroom.hashing(value)
               end
               attribute
             end
