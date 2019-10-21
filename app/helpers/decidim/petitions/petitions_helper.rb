@@ -31,7 +31,7 @@ module Decidim
       def support_url(petition)
         "support"\
         "?decidimAPIUrl=#{decidim_api.root_url}"\
-        "&serviceId=#{petition.attribute_id}"\
+        "&serviceId=#{petition.id}"\
         "&credentialIssuerEndpointAddress=#{credential_issuer(petition)}"\
         "&authorizableAttributeId=#{petition.attribute_id}"
       end
