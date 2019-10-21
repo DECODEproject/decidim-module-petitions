@@ -118,7 +118,12 @@ module Decidim
             ================================
           LOG_TEXT
           decode_status = petition.status.merge(status)
-          petition.update(log: petition_log.strip, status: decode_status)
+          petition.update_attributes(
+            log: petition_log.strip,
+            status: decode_status,
+            json_attribute_info: petition.json_attribute_info_was,
+            json_attribute_info_optional: petition.json_attribute_info_optional_was
+          )
         end
       end
     end

@@ -99,7 +99,7 @@ en:
               count: Count successfully done
               credential_issuer: The petition was successfully created on Credential
                 Issuer API
-              petitions: The petition was successfully created on Petitions API
+              create_petition: The petition was successfully created on Petitions API
               tally: Tally successfully done
           destroy:
             success: The petition was deleted successfully
