@@ -53,7 +53,7 @@ module Decidim
         def count_petition
           result = connector.count_dddc_petition
           if result[:status_code] == 200
-            votes = result[:response]["result"]
+            votes = result[:response]["results"]["pos"]
             petition.update_attribute(:votes, votes)
           end
           result
