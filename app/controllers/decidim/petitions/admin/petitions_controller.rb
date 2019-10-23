@@ -67,12 +67,20 @@ module Decidim
           DecodeConnector.call(petition, params[:command]) do
             on(:ok) do |result|
               flash[:notice] = I18n.t("petitions.decode.success.#{params[:command]}", scope: "decidim.petitions.admin")
-              update_log(result, params[:command].to_sym => true)
+              if result.has_key? :output
+                update_cmd_log(result, params[:command].to_sym => true)
+              else
+                update_http_log(result, params[:command].to_sym => true)
+              end
             end
             on(:invalid) do |result|
               flash[:error] = I18n.t("petitions.decode.invalid.#{result[:status_code]}",
                                      scope: "decidim.petitions.admin")
-              update_log(result, params[:command].to_sym => false)
+              if result.has_key? :output
+                update_cmd_log(result, params[:command].to_sym => false)
+              else
+                update_http_log(result, params[:command].to_sym => false)
+              end
             end
           end
         end
@@ -83,7 +91,39 @@ module Decidim
           @petition ||= Petition.find_by(component: current_component, id: params[:id])
         end
 
-        def update_log(result, status)
+        def update_cmd_log(result, status)
+          result_check = result[:api_result][:response]["results"] == JSON.parse(result[:output][:stdout])["results"]
+          petition_log = <<~LOG_TEXT
+            RESULT CHECK
+            ================================
+            #{result_check}
+            ================================
+            ZENROOM COMMAND OUTPUT
+            ================================
+            #{result[:output][:stderr].encode('iso-8859-1').encode('utf-8')}
+            ================================
+            PETITIONS API /count RESPONSE
+            ================================
+            #{result[:api_result][:response].to_json}
+            ================================
+            EXTRA DEBUG INFORMATION
+            ================================
+            TALLY DATA
+            ================================
+            #{JSON.pretty_generate(result[:output][:data][:tally])}
+            ================================
+            PETITION DATA
+            ================================
+            #{JSON.pretty_generate(result[:output][:data][:petition])}
+          LOG_TEXT
+          decode_status = petition.status.merge(status)
+          petition.update_attributes(
+            log: petition_log.strip,
+            status: decode_status
+          )
+        end
+
+        def update_http_log(result, status)
           petition_log = <<~LOG_TEXT
             CURL
             ================================

@@ -60,14 +60,9 @@ module Decidim
         end
 
         def assert_count
-          response = connector.assert_count_dddc_petitions
-          api_result = connector.count_dddc_petitions
-          flash[:info] = "
-            Zenroom response = #{response} |||
-            Petitions API Count = #{api_result[:response]}  |||
-            Results = #{response == api_result[:response]}
-          "
-          { status_code: 200 }
+          cmd_output = connector.assert_count_dddc_petition
+          api_result = connector.count_dddc_petition
+          { output: cmd_output, api_result: api_result, status_code: cmd_output[:status_code] }
         end
       end
     end
