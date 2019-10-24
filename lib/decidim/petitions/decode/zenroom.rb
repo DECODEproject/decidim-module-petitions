@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "open3"
+require "English"
 
 module Decidim
   module Petitions
@@ -37,9 +37,9 @@ module Decidim
           logger "ASSERT COUNT WITH ZENROOM"
           logger "TALLY    => #{json_tally}"
           logger "PETITION => #{json_petition}"
-          stdout = `#{ZENROOM} -k #{tally_file_path}  -a #{petition_file_path} -z #{contract}`.strip
           stderr = `#{ZENROOM} -k #{tally_file_path}  -a #{petition_file_path} -z #{contract} 2>&1`.strip
-          status_code = $?.exitstatus.zero? ? 200 : 100
+          stdout = `#{ZENROOM} -k #{tally_file_path}  -a #{petition_file_path} -z #{contract}`.strip
+          status_code = $CHILD_STATUS == 0 ? 200 : 100
           {
             stdout: stdout,
             stderr: stderr,
