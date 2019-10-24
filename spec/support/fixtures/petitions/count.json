@@ -1,3 +1,1 @@
-{
-  "result": 125
-}
+{"results":{"pos":125,"neg":0},"zenroom":{"curve":"goldilocks","encoding":"url64","version":"1.0.0+33bb5d1","scenario":"simple"}}

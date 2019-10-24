@@ -77,11 +77,14 @@
                     {icon: "cloudy", command: "assert_count", name: "Assert Count with Zenroom"}
                   ] %>
                   <% decode_options.each do |option| %>
+                    <%
+                        status = petition.status[option[:command]]
+                    %>
                     <%= icon_link_to option[:icon],
                           decode_petition_path(petition, command: option[:command].to_sym),
                           t("actions.close.#{option[:command]}", scope: "decidim.petitions"),
                           method: :post,
-                          class: "action-icon--close-#{option[:command]}" %>
+                          class: "action-icon--close-#{option[:command]} #{"success" if status}" %>
                   <% end %>
                 <% end %>
               <td class="table-list__actions">

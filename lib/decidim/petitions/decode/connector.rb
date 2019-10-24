@@ -56,12 +56,11 @@ module Decidim
           )
         end
 
-        def assert_count_dddc_petitions
+        def assert_count_dddc_petition
           api_result = fetch_dddc_petition
-          json_result = JSON.parse(api_result[:response])
           Decidim::Petitions::Decode::Zenroom.count_petition(
-            json_tally: json_result["tally"],
-            json_petition: json_result["petition"]
+            json_tally: api_result[:response]["tally"],
+            json_petition: api_result[:response]["petition"]
           )
         end
 

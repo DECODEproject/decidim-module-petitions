@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "open3"
+require "English"
 
 module Decidim
   module Petitions
@@ -14,8 +14,7 @@ module Decidim
         def self.hashing(data)
           # Hashes with zenroom some data. For having better privacy with Credential Issuer.
           #
-          hash, _status = Open3.capture2(ZENROOM, "-p", "print(ECDH.kdf(HASH.new('sha512'), str('#{data}')))")
-          hash.strip
+          `echo "print(ECDH.kdf(HASH.new('sha512'), str('#{data}')))" | #{ZENROOM} 2> /dev/null`.strip
         end
 
         def self.write_to_tmp_file(filename, contents)
@@ -31,14 +30,22 @@ module Decidim
           # from DECODE's dddc-pilot-contracts.
           #
           # It shouldn't be the same tally / petition for all the petitions
-          contract = "#{CONTRACTS_DIR}/tally_petition.zen"
+          contract = "#{CONTRACTS_DIR}/count_petition.zen"
           tally_file_path = write_to_tmp_file("tally.json", JSON.unparse(json_tally))
           petition_file_path = write_to_tmp_file("petition.json", JSON.unparse(json_petition))
           logger("*" * 80)
           logger "ASSERT COUNT WITH ZENROOM"
           logger "TALLY    => #{json_tally}"
           logger "PETITION => #{json_petition}"
-          `#{ZENROOM} -k #{tally_file_path}  -a #{petition_file_path} -z #{contract} 2> /dev/null`.strip
+          stderr = `#{ZENROOM} -k #{tally_file_path}  -a #{petition_file_path} -z #{contract} 2>&1`.strip
+          stdout = `#{ZENROOM} -k #{tally_file_path}  -a #{petition_file_path} -z #{contract}`.strip
+          status_code = $CHILD_STATUS == 0 ? 200 : 100
+          {
+            stdout: stdout,
+            stderr: stderr,
+            status_code: status_code,
+            data: { tally: json_tally, petition: json_petition }
+          }
         end
       end
     end

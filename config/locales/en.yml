@@ -96,11 +96,11 @@ en:
               assert_count: Count successfully done
               barcelona_now_dashboard: The petition was successfully created on Barcelona
                 Now API
-              count: Count successfully done
+              count_petition: Count successfully done
               credential_issuer: The petition was successfully created on Credential
                 Issuer API
               create_petition: The petition was successfully created on Petitions API
-              tally: Tally successfully done
+              tally_petition: Tally successfully done
           destroy:
             success: The petition was deleted successfully
           edit:
