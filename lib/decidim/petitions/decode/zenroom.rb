@@ -39,8 +39,8 @@ module Decidim
           logger "PETITION => #{json_petition}"
           stdout = `#{ZENROOM} -k #{tally_file_path}  -a #{petition_file_path} -z #{contract}`.strip
           stderr = `#{ZENROOM} -k #{tally_file_path}  -a #{petition_file_path} -z #{contract} 2>&1`.strip
-          status_code = $?.exitstatus == 0 ? 200 : 100
-          return {
+          status_code = $?.exitstatus.zero? ? 200 : 100
+          {
             stdout: stdout,
             stderr: stderr,
             status_code: status_code,

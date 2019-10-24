@@ -100,7 +100,7 @@ module Decidim
             ================================
             ZENROOM COMMAND OUTPUT
             ================================
-            #{result[:output][:stderr].encode('iso-8859-1').encode('utf-8')}
+            #{result[:output][:stderr]}
             ================================
             PETITIONS API /count RESPONSE
             ================================
