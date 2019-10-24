@@ -15,7 +15,6 @@ Add this line to your Gemfile:
 
 gem "decidim-petitions",
     git: "https://github.com/alabs/decidim-module-petitions",
-    branch: "0.17-stable"
 
 ```
 
@@ -28,6 +27,15 @@ rake decidim_petitions:install:migrations
 rake db:migrate
 
 ```
+
+To use this module you need to have at least running Credentials Issuer API and Petition API from DECODE project. To do so:
+
+- Head to Petitions configuration and specify the Cred. Issuer and Petitions API URLs as well as user and passwords to interact with them.
+
+- Make sure the petition details are well configured ![](docs/decode-petitions-cog.png).
+
+Then you need to configure the petition with the associated data for the Mobile App. For details, see http://app.decodeproject.eu.
+
 
 ### Screenshots
 
