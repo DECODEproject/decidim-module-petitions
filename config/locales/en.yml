@@ -131,9 +131,30 @@ en:
           summary: Summary
           votes: Signatures
         show:
-          incompatible_html: You're not on a compatible device. Get a credential,
-            download the app and sign the petition from the app. <a href="%{url}">Read
-            instructions.</a>
+          instructions_mini_html: |
+            <p>In order to sign this petition you must obtain a credential and you must also have the DECODE application installed on your mobile device in <a href="https://play.google.com/store/apps/details?id=com.dribia.decodeapp">Google Play</a> or the <a href="https://apps.apple.com/es/app/decode-app/id1451694589">App Store</a>.</p>
+          instructions_full_html: |
+            <p>To sign the petition you can do so:</p>
+            <ul>
+              <li>Visiting the petition page with a browser on your mobile device.</li>
+              <li>Scanning with a QR code application.</li>
+            </ul>
+            <h2>How to start using the DECODE App</h2>
+            <ol>
+              <li>Download the DECODE App - Search for "DECODE App” from Dribia Data Research in <a href="https://play.google.com/store/apps/details?id=com.dribia.decodeapp">Google Play</a> or <a href="https://apps.apple.com/es/app/decode-app/id1451694589">App Store</a></li>
+              <li>Create your PIN</li>
+              <li>Optional: Add your personal data on the app</li>
+              <li>Click on "Sign a DDDC petition"</li>
+              <li>Click on “Activate application through QR”</li>
+              <li>Scan the QR</li>
+              <li>Enter the credential to participate</li>
+              <li>Optional: Choose what data you want to share and click on verify</li>
+              <li>Input identification code and Click on “Get certificate”</li>
+              <li>Sign a petition</li>
+              <li>Explore the results to "Go to BarcelonaNow"</li>
+            </ol>
+            <p> To obtain more information on the entire process and the DECODE project, please visit <a href="http://app.decodeproject.eu">http://app.decodeproject.eu</a>.</p>
+          read_more: Read more
       services:
         title: DECODE services
       states:
