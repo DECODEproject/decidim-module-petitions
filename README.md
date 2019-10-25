@@ -36,7 +36,7 @@ URLs as well as user and passwords to interact with them.
 - Make sure the petition details are well configured ![](docs/decode-petitions-cog.png).
 
 Then you need to configure the petition with the associated data for the Mobile App.
-For details, see http://app.decodeproject.eu.
+For details, see [http://app.decodeproject.eu](http://app.decodeproject.eu).
 
 ### Screenshots
 
@@ -56,8 +56,10 @@ This field adds information that any app wishing to interact with the site can u
 For the moment, it does no require anything beyond the fields specified below as "mandatory":
 
 - Name: Name with translations to identify the petition within the app
+
 - Provenance: Provenance that indicates where the credentials are from (what is shown to
 the user). Must coincide with the credential issuer set up in the system.
+
 - Verification Input: Translations and names for the type of verification chosen (see next
 section).
 
@@ -130,17 +132,19 @@ of the users that participate in the petitions.
 
 The aggreated information is exposed on the endpoint of the credential issuer /stats.
 
-- The parametter "k" specifies the minimum number of entries needed for a value to be
-shown for privacy reasons.
+- The parametter "k" specifies the minimum number of entries needed for a value
+to be shown for privacy reasons.
+
 - The name is the identifier that needs to be compatible with the DECODE Atlas
 (see [APP repo](https://github.com/DECODEproject/decodev2/tree/master/docs) for details)
+
 - The value set is the set of values (ranges) that the data accepts.
 
-All those fields are not free, and must be compatible with the DECODE Atlas file. The
-only option for the admin is to define the "k" security aggregation values.
+All those fields are not free, and must be compatible with the DECODE Atlas
+file. The only option for the admin is to define the "k" security aggregation
+values.
 
 ```json
-
 [
   {
     "k": 2,
