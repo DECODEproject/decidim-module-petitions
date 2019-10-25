@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-# rubocop:disable EnforcedStyle
 
 module Decidim
   module Petitions
@@ -44,6 +43,8 @@ module Decidim
           ]
         }
 
+        # rubocop:disable EnforcedStyle
+
         attribute :json_attribute_info, SchemaAttribute, default: [{
           "name": "codes",
           "type": "str",
@@ -51,7 +52,7 @@ module Decidim
             "1234",
             "a_password"
           ]
-      }]
+        }]
 
         attribute :json_attribute_info_optional, SchemaAttribute, default: [
           {
@@ -73,6 +74,8 @@ module Decidim
             "value_set": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
           }
         ]
+
+        # rubocop:enable EnforcedStyle
 
         attribute :is_reissuable
 

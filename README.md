@@ -132,7 +132,8 @@ The aggreated information is exposed on the endpoint of the credential issuer /s
 - The parametter "k" specifies the minimum number of entries needed for a value
   to be shown for privacy reasons.
 - The name is the identifier that needs to be compatible with the DECODE Atlas
-  (see [APP repo](https://github.com/DECODEproject/decodev2/tree/master/docs) for details)
+  (see [APP repo](https://github.com/DECODEproject/decodev2/tree/master/docs)
+  for details)
 - The value set is the set of values (ranges) that the data accepts.
 
 All those fields are not free, and must be compatible with the DECODE Atlas
