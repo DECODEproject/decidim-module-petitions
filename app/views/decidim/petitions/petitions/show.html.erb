@@ -1,5 +1,7 @@
 <% provide(:title, translated_attribute(present(petition).title)) %>
 
+<%= javascript_include_tag "decidim/petitions/show_more" %>
+
 <% add_decidim_meta_tags({
   title: translated_attribute(present(petition).title),
   description: translated_attribute(present(petition).description),
@@ -19,11 +21,6 @@
               large-3 large-push-9">
     <div class="card">
       <div class="card__content">
-        <% if petition.opened? %>
-          <div class="hide-for-touch show-for-desktop card__actions callout secondary">
-            <%= t ".incompatible_html", url: translated_attribute(petition.instructions_url) %>
-          </div>
-        <% end %>
         <div class="card__qr">
           <img src="<%= petition_qrcode(petition) %>" />
         </div>
@@ -39,6 +36,17 @@
     </div>
   </div>
   <div class="columns mediumlarge-8 mediumlarge-pull-4">
+    <% if petition.opened? %>
+      <div class="callout secondary">
+        <%=  t('.instructions_mini_html') %>
+        <div class="show-more">
+          <button class="button button--muted small"><%= t(".read_more") %></button>
+        </div>
+        <div class="hide show-more-panel">
+          <%=  t('.instructions_full_html') %>
+        </div>
+      </div>
+    <% end %>
     <div class="section">
       <h4 class="section-heading"><%= t('summary', scope: 'decidim.petitions.petitions.petition') %></h4>
       <%= decidim_sanitize translated_attribute petition.summary %>
