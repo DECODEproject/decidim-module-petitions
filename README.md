@@ -95,6 +95,8 @@ This field defines the authorization codes that the credential issuer needs in o
 
 In the example below, the codes are defined as strings and codenamed "codes". For more information, see please [the credential issuer documentation](https://credentials.decodeproject.eu/docs) or the repository[https://github.com/DECODEproject/credential-issuer].
 
+WARNING: The first code is going to be used for Petitions API setup.
+
 ```json
 
 [{
