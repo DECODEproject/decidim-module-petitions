@@ -43,7 +43,7 @@ module Decidim
           ]
         }
 
-        # rubocop:disable EnforcedStyle
+        # rubocop:disable Style/WordArray
 
         attribute :json_attribute_info, SchemaAttribute, default: [{
           "name": "codes",
@@ -75,7 +75,7 @@ module Decidim
           }
         ]
 
-        # rubocop:enable EnforcedStyle
+        # rubocop:enable Style/WordArray
 
         attribute :is_reissuable
 
