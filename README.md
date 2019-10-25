@@ -53,18 +53,18 @@ It's important to configure some JSON data so it's consumed by the DECODE's APIs
 ## json_schema
 
 This field adds information that any app wishing to interact with the site can use.
-For the moment, it does no require anything beyond the fields specified below as "mandatory":
+For the moment, it does no require anything beyond the fields specified below as
+"mandatory":
 
 - Name: Name with translations to identify the petition within the app
 
-- Provenance: Provenance that indicates where the credentials are from (what is shown to
-the user). Must coincide with the credential issuer set up in the system.
+- Provenance: Provenance that indicates where the credentials are from (what is
+shown to the user). Must coincide with the credential issuer set up in the system.
 
-- Verification Input: Translations and names for the type of verification chosen (see next
-section).
+- Verification Input: Translations and names for the type of verification chosen
+(see next section).
 
 ```json
-
 {
   "mandatory": [
     {
@@ -108,7 +108,7 @@ can be one-use (if the tick ```is reisuable``` is set to true) or multiple use
 
 In the example below, the codes are defined as strings and codenamed "codes". For
 more information, see please [the credential issuer documentation](https://credentials.decodeproject.eu/docs)
-or the repository[https://github.com/DECODEproject/credential-issuer].
+or (the repository)[https://github.com/DECODEproject/credential-issuer].
 
 WARNING: The first code is going to be used for Petitions API setup.
 
