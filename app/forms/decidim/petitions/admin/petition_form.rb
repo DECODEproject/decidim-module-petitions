@@ -47,8 +47,8 @@ module Decidim
           "name": "codes",
           "type": "str",
           "value_set": [
-              "1234",
-              "a_password"
+            "1234",
+            "a_password"
           ]
       }]
 
@@ -57,19 +57,19 @@ module Decidim
             "k": 2,
             "name": "age",
             "type": "str",
-            "value_set": [ "0-19", "20-29", "30-39", ">40" ]
+            "value_set": ["0-19", "20-29", "30-39", ">40"]
           },
           {
             "k": 2,
             "name": "gender",
             "type": "str",
-            "value_set": [ "F", "M", "O" ]
+            "value_set": ["F", "M", "O"]
           },
           {
             "k": 2,
             "name": "district",
             "type": "str",
-            "value_set": [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ]
+            "value_set": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
           }
         ]
 
