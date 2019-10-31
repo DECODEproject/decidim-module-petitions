@@ -26,13 +26,22 @@
         </div>
         <% if petition.closed? %>
           <%= render partial: "votes_count" %>
+        </div>
         <% end %>
         <% if petition.opened? %>
           <div class="show-for-touch card__actions">
             <%= decodewallet_button(petition) %>
           </div>
+        </div>
+        <div class="card__footer">
+          <div class="card__support">
+            <p class="card--process__small">
+              <%= t('.card.instructions.apps_html') %>
+            </p>
+            <%= t('.card.instructions.read_more_html') %>
+          </div>
+        </div>
         <% end %>
-      </div>
     </div>
   </div>
   <div class="columns mediumlarge-8 mediumlarge-pull-4">
