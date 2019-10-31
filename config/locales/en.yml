@@ -131,6 +131,12 @@ en:
           summary: Summary
           votes: Signatures
         show:
+          card:
+            instructions:
+              apps_html: |
+                To access this petition you'll need the app from <a href="https://play.google.com/store/apps/details?id=com.dribia.decodeapp">Google Play</a> or <a href="https://apps.apple.com/es/app/decode-app/id1451694589">App Store</a>
+              read_more_html:
+                <a href="https://tools.decodeproject.eu/app/">Read more about the app</a>
           instructions_mini_html: |
             <p>In order to sign this petition you must obtain a credential and you must also have the DECODE application installed on your mobile device in <a href="https://play.google.com/store/apps/details?id=com.dribia.decodeapp">Google Play</a> or the <a href="https://apps.apple.com/es/app/decode-app/id1451694589">App Store</a>.</p>
           instructions_full_html: |
