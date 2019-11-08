@@ -1,8 +1,8 @@
 # decidim-petitions
 
-[![Build Status](https://img.shields.io/circleci/project/github/decodeproject/decidim-module-petitions/master.svg)](https://circleci.com/gh/decodeproject/decidim-module-petitions)
-[![Coverage](https://img.shields.io/codeclimate/coverage/decodeproject/decidim-module-petitions.svg)](https://codeclimate.com/github/decodeproject/decidim-module-petitions)
-[![Maintainability](https://img.shields.io/codeclimate/maintainability/decodeproject/decidim-module-petitions.svg)](https://codeclimate.com/github/decodeproject/decidim-module-petitions)
+[![Build Status](https://img.shields.io/circleci/project/github/DECODEproject/decidim-module-petitions/master.svg)](https://circleci.com/gh/DECODEproject/decidim-module-petitions)
+[![Coverage](https://img.shields.io/codeclimate/coverage/alabs/decidim-module-petitions.svg)](https://codeclimate.com/github/alabs/decidim-module-petitions)
+[![Maintainability](https://img.shields.io/codeclimate/maintainability/alabs/decidim-module-petitions.svg)](https://codeclimate.com/github/alabs/decidim-module-petitions)
 
 This is the open-source repository for DDDC, based on [Decidim](https://github.com/decidim/decidim),
 implementing the [DECODE](https://decodeproject.eu/) prototypes.
