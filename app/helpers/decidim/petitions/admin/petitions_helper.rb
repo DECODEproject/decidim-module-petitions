@@ -4,10 +4,8 @@ module Decidim
   module Petitions
     module Admin
       module PetitionsHelper
-
         def default_json_attribute_info
           # rubocop:disable Style/WordArray
-
           [{
             "name": "codes",
             "type": "str",
@@ -39,13 +37,13 @@ module Decidim
               "value_set": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
             }
           ]
-
           # rubocop:enable Style/WordArray
         end
 
         def default_json_schema
           credential_url = current_component.settings.credential_issuer_api_url
           petition_url = current_component.settings.petitions_api_url
+          # rubocop:disable Style/UnneededInterpolation
           {
             "mandatory": [
               {
@@ -77,6 +75,7 @@ module Decidim
               }
             ]
           }
+          # rubocop:enable Style/UnneededInterpolation
         end
       end
     end
