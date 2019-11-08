@@ -14,7 +14,7 @@ Add this line to your Gemfile:
 ```ruby
 
 gem "decidim-petitions",
-    git: "https://github.com/alabs/decidim-module-petitions",
+    git: "https://github.com/decodeproject/decidim-module-petitions",
 
 ```
 
