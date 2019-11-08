@@ -37,13 +37,30 @@ Petition API from DECODE project. To do so:
 Then you need to configure the petition with the associated data for the Mobile App.
 For details, see [http://app.decodeproject.eu](http://app.decodeproject.eu).
 
-### Screenshots
+## Screenshots
 
 ![](docs/decode-petitions-01.png)
 ![](docs/decode-petitions-02.png)
 ![](docs/decode-petitions-03.png)
 ![](docs/decode-petitions-04.png)
 ![](docs/decode-petitions-05.png)
+
+## Tests
+
+Install [ChromeDriver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver).
+
+```bash
+sudo apt-get install chromium-chromedriver
+```
+
+Create test app and use rspec for running tests locally:
+
+```bash
+bundle exec rake test_app
+bundle exec rspec
+```
+
+## Documentation
 
 ### JSON Schema and Attributes Authorization
 
