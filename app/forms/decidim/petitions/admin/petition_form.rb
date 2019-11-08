@@ -12,9 +12,12 @@ module Decidim
         translatable_attribute :instructions_url, String
         attribute :image
         attribute :is_reissuable
-        attribute :json_schema, SchemaAttribute
-        attribute :json_attribute_info_optional, SchemaAttribute
-        attribute :json_attribute_info, SchemaAttribute
+
+        # We override these defaults on a helper in the form to add the
+        # credential and petition URLs in the JSON
+        attribute :json_schema, SchemaAttribute, default: {}
+        attribute :json_attribute_info_optional, SchemaAttribute, default: [{}]
+        attribute :json_attribute_info, SchemaAttribute, default: {}
 
         mimic :petition
 
