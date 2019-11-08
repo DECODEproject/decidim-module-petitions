@@ -134,7 +134,7 @@ en:
           card:
             instructions:
               apps_html: |
-                To access this petition you'll need the app from <a href="https://play.google.com/store/apps/details?id=com.dribia.decodeapp">Google Play</a> or <a href="https://apps.apple.com/es/app/decode-app/id1451694589">App Store</a>
+                To access this petition you'll need the app from %{link_google_play} %{link_app_store}
               read_more_html:
                 <a href="https://tools.decodeproject.eu/app/">Read more about the app</a>
           instructions_mini_html: |
