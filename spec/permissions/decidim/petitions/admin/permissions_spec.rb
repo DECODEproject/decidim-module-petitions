@@ -33,7 +33,7 @@ describe Decidim::Petitions::Admin::Permissions do
     end
 
     it "deny permission" do
-      is_expected.to eq false
+      expect(subject).to eq false
     end
   end
 
@@ -43,7 +43,7 @@ describe Decidim::Petitions::Admin::Permissions do
     context "when creating a petition" do
       let(:action_name) { :create }
 
-      it { is_expected.to eq true }
+      it { expect(subject).to eq true }
     end
   end
 end
