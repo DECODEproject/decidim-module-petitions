@@ -15,7 +15,6 @@ module Decidim
       end
 
       initializer "decidim_petitions.assets" do |app|
-        app.config.assets.paths << File.expand_path("../../../app/assets/images/decidim/petitions", __dir__)
         app.config.assets.precompile += %w(
           decidim_petitions_manifest.js
           decidim_petitions_manifest.css
